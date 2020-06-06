@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.user = this.auth$.user();
     if (this.user) {
-      this.router.navigate(['/perfil']);
+      this.router.navigate(['/inicio']);
     }
   }
 
