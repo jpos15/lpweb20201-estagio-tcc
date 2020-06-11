@@ -15,11 +15,12 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'sobre', component: SobreComponent },
+  { path: 'propostas-de-estagio', component: PropostaEstagioComponent},
   {
     path: 'inicio', component: InicioComponent, children: [
       { path: 'propostas-de-tcc', component: PropostasDeTCCComponent },
       { path: 'propostas-de-tcc/:id', component: PropostaDeTCCComponent },
-      { path: 'proposta-estagio', component: PropostaEstagioComponent},
+
       { path: '', component: HomeInicioComponent }
     ]
   },

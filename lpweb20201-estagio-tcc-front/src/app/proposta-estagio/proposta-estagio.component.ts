@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
-import { PropostaEstagioService } from '../proposta-estagio.service';
+import { ActivatedRoute } from '@angular/router';
+import { PropostaEstagioService } from './proposta-estagio.service';
+import { delay } from 'rxjs/operators';
 
 
 @Component({
@@ -14,31 +15,59 @@ export class PropostaEstagioComponent implements OnInit {
   constructor(
     public proposta$: PropostaEstagioService,
     public auth$: AuthService,
-    private router: Router,
+    private router: ActivatedRoute,
     ) {
   }
 
   user:any;
-  orientador = null;
+  orientacao = null;
   titulo = null;
   conceitos = null;
   resultados = null;
+  minhasOrientacoes = null;
+  orientacoes: any;
 
-
-
-  ngOnInit(): void {
+ ngOnInit(): void {
     this.user = this.auth$.user();
+
+    if(this.user){
+
+
+          this.proposta$.orientacao()
+
+            .subscribe(dados => {
+              this.orientacoes = dados.results;
+              this.encontrarOrientacao();
+
+            });
+          }
+
   }
 
   enviarDados(){
     let dados = {
-      orientador: this.user.id,
+      orientacao_id: this.orientacao,
       titulo: this.titulo,
       conceitos: this.conceitos,
-      resultado: this.resultados
+      resultados_esperados: this.resultados,
+      membros_da_banca: []
 
 
     }
-    this.proposta$.adicionar(dados)
+    this.proposta$.cadastrar(dados)
+    console.log(dados)
+
+
   }
+
+  encontrarOrientacao(){
+
+
+    this.minhasOrientacoes = this.orientacoes.filter((alunoO)=> alunoO.tipo === "estagio" && alunoO.aluno.id === this.user.id)
+
+
+    console.log(this.minhasOrientacoes)
+  }
+
 }
+
