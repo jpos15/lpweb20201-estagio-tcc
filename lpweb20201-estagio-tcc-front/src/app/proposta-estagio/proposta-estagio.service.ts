@@ -15,7 +15,7 @@ export class PropostaEstagioService {
 
 
   cadastrar(proposta:any){
-    return this.http.post(environment.API_URL.concat(`propostas-de-estagio/`), proposta, this.auth$.httpOptions()).subscribe();
+    return this.http.post(environment.API_URL.concat(`propostas-de-estagio/`), proposta, this.auth$.httpOptions());
   }
   orientacao() : Observable<any> {
     return this.http.get<RetornoApiViewModel<any>>(environment.API_URL.concat('orientacoes/'), this.auth$.httpOptions());

@@ -27,23 +27,17 @@ export class PropostaEstagioComponent implements OnInit {
   minhasOrientacoes = null;
   orientacoes: any;
 
+  error = null;
+  sucesso = null;
+
  ngOnInit(): void {
-    this.user = this.auth$.user();
+  this.user = this.auth$.user();
 
-    if(this.user){
-
-
-          this.proposta$.orientacao()
-
-            .subscribe(dados => {
-              this.orientacoes = dados.results;
-              this.encontrarOrientacao();
-
-            });
-          }
-
+  if(this.user){
+    this.proposta$.orientacao().subscribe(dados => {this.orientacoes = dados.results;this.encontrarOrientacao();});
   }
 
+  }
   enviarDados(){
     let dados = {
       orientacao_id: this.orientacao,
@@ -51,13 +45,9 @@ export class PropostaEstagioComponent implements OnInit {
       conceitos: this.conceitos,
       resultados_esperados: this.resultados,
       membros_da_banca: []
-
-
     }
-    this.proposta$.cadastrar(dados)
+    this.proposta$.cadastrar(dados).subscribe(() => {this.sucesso = true}, err => this.error = err.error);
     console.log(dados)
-
-
   }
 
   encontrarOrientacao(){
