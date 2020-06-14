@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="col">
+      <h4 class="mb-3">Perfil do Usuario</h4>
+      <form class="needs-validation" #edicao = "ngForm" (submit)="editarPerfil()" name="editar_perfil">
+        <div class="mb-3">
+          <label for="Usuario">Usuario</label>
+          <input type="text" class="form-control" id="Usuario" [value]="user.username" disabled required="">
+          <div class="invalid-feedback">
+            É obrigatório inserir um Usuario válido.
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="primeiroNome">Nome<span class="text-muted">*</span></label>
+            <input type="text" class="form-control" [(ngModel)]= "perfil.nome" name="nome" #nomeV="ngModel" required
+            [class.is-invalid]="nomeV.invalid && (nomeV.dirty || nomeV.touched)">
+            <small class="form-text text-muted"
+              *ngIf="!(nomeV.invalid && (nomeV.dirty || nomeV.touched))">Informe o nome completo.</small>
+            <div *ngIf="nomeV.invalid && (nomeV.dirty || nomeV.touched)" class="invalid-feedback">
+              <span *ngIf="nomeV.errors.required">Você precisa informar o nome!</span>
+            </div>
+          </div>
+  
+          <div class="col-md-3 mb-3">
+            <label for="estado">Sexo</label>
+            <div>
+              <input type='radio' class="m-1" name="sexo" [(ngModel)]= "perfil.sexo" id='Masculino' value="M">
+              <label for="Masculino"
+              >Masculino</label>
+              <input type="radio" class="m-1" name='sexo' [(ngModel)]= "perfil.sexo" id='Feminino' value="F">
+              <label for="Feminino">Feminino</label>
+            </div>
+            <div class="invalid-feedback">
+              Por favor, insira um estado válido.
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="cpf">CPF</label>
+            <input type="text" class="form-control" id="cpf" name="cpf" [(ngModel)]= "perfil.cpf">
+            <div class="invalid-feedback">
+              É obrigatório inserir um sobre nome válido.
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-3">
+            <label for="Telefone">Telefone</label>
+            <div class="input-group">
+                <input type="text" class="form-control" name="Telefone" [(ngModel)]= "perfil.telefone" id="Telefone">
+                <div class="invalid-feedback" style="width: 100%;">
+                Seu nickname é obrigatório.
+                </div>
+            </div>
+            </div>
+            
+            <div class="col-md-4 mb3">
+                <label for="CEP">CEP</label>
+                <input type="text" class="form-control" name="CEP" [(ngModel)]="perfil.cep" id="CEP">
+                <div class="invalid-feedback">
+                  Por favor, insira seu CEP.
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+            <label for="endereco">Endereço</label>
+            <input type="text" class="form-control" name="endereco" [(ngModel)]= "perfil.endereco" id="endereco">
+            <div class="invalid-feedback">
+                Por favor, insira seu endereço.
+            </div>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="estado">Estado</label>
+            <select class="custom-select d-block w-100" name="estado" [(ngModel)]= "perfil.estado_uf" id="estado">
+              <option value="">Escolha...</option>
+              <option value="TO">TO</option>
+              <option value="GO">GO</option>
+            </select>
+            <div class="invalid-feedback">
+              Por favor, escolha um estado.
+            </div>
+          </div>
+  
+          <div class="col-md-7 mb-3">
+            <label for="Cidade">Cidade</label>
+            <input type="text" class="form-control" name="cidade" [(ngModel)]="perfil.cidade" id="cidade">
+            <div class="invalid-feedback">
+              Por favor, digite sua cidade.
+            </div>
+          </div>
+        </div>
+  
+        <div>
+          <button class="btn btn-primary btn-lg" type="submit" [disabled]="edicao.invalid">Salvar</button>
+          <button class="btn btn-outline-primary btn-lg ml-3" [routerLink]="['/inicio','perfil']">
+            <i class="fas fa-chevron-circle-left mr-1"></i>Voltar</button>
+        </div>
+      </form>
+    </div>
+  </div>

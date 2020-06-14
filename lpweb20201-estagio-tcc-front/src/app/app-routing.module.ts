@@ -9,21 +9,26 @@ import { HomeInicioComponent } from './home-inicio/home-inicio.component';
 import { PropostasDeTCCComponent } from './propostas-de-tcc/propostas-de-tcc.component';
 import { PropostaDeTCCComponent } from './proposta-de-tcc/proposta-de-tcc.component';
 import { PropostaEstagioComponent } from './proposta-estagio/proposta-estagio.component';
+import { CadastrarPerfilComponent } from './perfil/cadastrar-perfil/cadastrar-perfil.component';
+import { EditarPerfilComponent } from './perfil/editar-perfil/editar-perfil.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'perfil', component: PerfilComponent },
-  { path: 'sobre', component: SobreComponent },
   { path: 'propostas-de-estagio', component: PropostaEstagioComponent},
   {
     path: 'inicio', component: InicioComponent, children: [
       { path: 'propostas-de-tcc', component: PropostasDeTCCComponent },
       { path: 'propostas-de-tcc/:id', component: PropostaDeTCCComponent },
-
+      { path: 'perfil', component: PerfilComponent},
+      { path: 'sobre', component: SobreComponent },
+      
       { path: '', component: HomeInicioComponent }
     ]
   },
+  {path: 'cadastrar-perfil',component: CadastrarPerfilComponent},
+  {path: 'editar-perfil',component: EditarPerfilComponent},
+
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PaginaNaoEncontradaComponent }
 ];

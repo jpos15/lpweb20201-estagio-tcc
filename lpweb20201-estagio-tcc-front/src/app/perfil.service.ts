@@ -14,4 +14,16 @@ export class PerfilService {
   perfilLogado() {
     return this.http.get(environment.API_URL.concat('perfil-logado/'), this.auth$.httpOptions());
   }
+
+  cadastraPerfil(form: any){
+    console.log(this.auth$.httpOptions())
+     return this.http.post(environment.API_URL.concat('perfis/'), JSON.stringify(form),
+        this.auth$.httpOptions());
+  }
+
+  editarPerfil(form: any){
+    console.log(this.auth$.httpOptions())
+     return this.http.put(environment.API_URL.concat('perfis/'+form.id+'/'), JSON.stringify(form),
+        this.auth$.httpOptions());
+  }
 }

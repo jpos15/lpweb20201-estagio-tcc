@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         delay(1000),
         concatMap(() => this.auth$.getDetalhesDoUsuarioLogado())
       ).subscribe(
-        () => this.router.navigate(['/perfil']),
+        () => this.router.navigate(['/inicio']),
         err => this.error = err.error
       );
     /*

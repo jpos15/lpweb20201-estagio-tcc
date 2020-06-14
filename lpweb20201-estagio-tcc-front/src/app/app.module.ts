@@ -17,6 +17,8 @@ import { HomeInicioComponent } from './home-inicio/home-inicio.component';
 import { PropostaDeTCCComponent } from './proposta-de-tcc/proposta-de-tcc.component';
 import { PropostasDeTCCComponent } from './propostas-de-tcc/propostas-de-tcc.component';
 import { PropostaEstagioComponent } from './proposta-estagio/proposta-estagio.component';
+import { CadastrarPerfilComponent } from './perfil/cadastrar-perfil/cadastrar-perfil.component';
+import { EditarPerfilComponent } from './perfil/editar-perfil/editar-perfil.component';
 
 registerLocaleData(localePt, 'pt', localePtExtra);
 
@@ -32,7 +34,9 @@ registerLocaleData(localePt, 'pt', localePtExtra);
     HomeInicioComponent,
     PropostaDeTCCComponent,
     PropostasDeTCCComponent,
-    PropostaEstagioComponent
+    PropostaEstagioComponent,
+    CadastrarPerfilComponent,
+    EditarPerfilComponent
   ],
   imports: [
     BrowserModule,
