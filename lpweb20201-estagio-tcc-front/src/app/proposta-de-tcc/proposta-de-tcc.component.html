@@ -1,38 +1,23 @@
-<div *ngIf="proposta">
-    <div class="d-flex justify-content-between">
-        <h1>{{proposta.titulo}}</h1>
+<div class="flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+        <h4>Propostas de TCC</h4> <a type="button" class="btn btn-success" [routerLink]="['/inicio', 'proposta-de-tcc', 'cadastro']">Nova Proposta de TCC</a>
+    </div>
+</div>
+<p>A lista a seguir apresenta suas propostas de TCC. Clique em um item da lista para ver mais detalhes.</p>
+
+<div class="list-group" *ngIf="propostas">
+    <a [routerLink]="['/inicio', 'propostas-de-tcc', proposta.id]"
+        class="list-group-item list-group-item-action d-flex justify-content-between"
+        *ngFor="let proposta of propostas.results">
+        <strong>{{proposta.titulo}}</strong>
         <div>
             <div class="badge badge-success" *ngIf="proposta.aprovada === true">Aprovada</div>
             <div class="badge badge-warning" *ngIf="proposta.aprovada === false">Não aprovada</div>
             <div class="badge badge-info" *ngIf="proposta.aprovada == null">Não avaliada</div>
         </div>
-    </div>
-    <div>
-        <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
-        Orientador(a): Prof(a) {{proposta.orientacao.professor.funcionario.nome}}
-    </div>
-    <div>
-
-    </div>
-
-    <hr>
-
-    <h4>Objetivo</h4>
-    <div class="text-whitespace-pre-line">{{proposta.objetivo}}</div>
-
-    <h4>Conceitos</h4>
-    <div class="text-whitespace-pre-line">{{proposta.conceitos}}</div>
-
-    <h4>Tecnologias</h4>
-    <div class="text-whitespace-pre-line">{{proposta.tecnologias}}</div>
-
-    <h4>Resultados esperados</h4>
-    <div class="text-whitespace-pre-line">{{proposta.resultados_esperados}}</div>
-
-    <h4>Metodologia</h4>
-    <div class="text-whitespace-pre-line">{{proposta.metodologia}}</div>
+    </a>
 </div>
 
-<div class="alert alert-info" *ngIf="!proposta">
+<div class="alert alert-info" *ngIf="!propostas">
     <strong>Aguarde</strong>. Carregando...
 </div>

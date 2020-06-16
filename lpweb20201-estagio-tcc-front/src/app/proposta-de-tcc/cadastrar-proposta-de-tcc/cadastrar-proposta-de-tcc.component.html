@@ -1,0 +1,131 @@
+<form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+    <div class="container">
+
+        <h5>Cadastrar Proposta de TCC</h5>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="col-form-label custom-select-label">Orientacão<span
+                                class="text-danger">*</span></label>
+                        <select id="orientacao_id" name="orientacao_id" class="form-control"
+                            formControlName="orientacao_id"
+                            [ngClass]="{'is-invalid': cadastroForm.get('orientacao_id').errors && (cadastroForm.get('orientacao_id').dirty || cadastroForm.get('orientacao_id').touched)}">
+                            <option *ngFor="let item of listaOrientacoes" [value]="item.id">
+                                {{ item.id  }} - {{ item.aluno.nome }} - {{ item.curso.nome }} - {{ item.aluno.nome }} -
+                                {{ item.professor.nome }} ({{ item.professor.funcao | titlecase }}) -
+                                {{ item.ano }}-{{ item.semestre }} ({{ item.tipo | titlecase }})</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            <span
+                                *ngIf="cadastroForm.get('orientacao_id').errors?.required && (cadastroForm.get('orientacao_id').dirty || cadastroForm.get('orientacao_id').touched)">
+                                Curso é obrigatório
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label for="titulo">Título<span class="text-danger">*</span></label>
+                            <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Título"
+                                formControlName="titulo"
+                                [ngClass]="{'is-invalid': cadastroForm.get('titulo').errors && (cadastroForm.get('titulo').dirty || cadastroForm.get('titulo').touched)}">
+                            <div class="invalid-feedback">
+                                <span
+                                    *ngIf="cadastroForm.get('titulo').errors?.required && (cadastroForm.get('titulo').dirty || cadastroForm.get('titulo').touched)">
+                                    Título é obrigatório
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label for="conceitos">Conceitos<span class="text-danger">*</span></label>
+                            <textarea id="conceitos" name="conceitos" class="form-control" rows="3"
+                                placeholder="Conceitos" formControlName="conceitos"
+                                [ngClass]="{'is-invalid': cadastroForm.get('conceitos').errors && (cadastroForm.get('conceitos').dirty || cadastroForm.get('conceitos').touched)}"></textarea>
+                            <div class="invalid-feedback">
+                                <span
+                                    *ngIf="cadastroForm.get('conceitos').errors?.required && (cadastroForm.get('conceitos').dirty || cadastroForm.get('conceitos').touched)">
+                                    Conceitos é obrigatório
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label for="resultados_esperados">Resultados esperados<span class="text-danger">*</span></label>
+                            <textarea id="resultados_esperados" name="resultados_esperados" class="form-control" rows="3"
+                                placeholder="Resultados esperados" formControlName="resultados_esperados"
+                                [ngClass]="{'is-invalid': cadastroForm.get('resultados_esperados').errors && (cadastroForm.get('resultados_esperados').dirty || cadastroForm.get('resultados_esperados').touched)}"></textarea>
+                            <div class="invalid-feedback">
+                                <span
+                                    *ngIf="cadastroForm.get('resultados_esperados').errors?.required && (cadastroForm.get('resultados_esperados').dirty || cadastroForm.get('resultados_esperados').touched)">
+                                    Resultados esperados é obrigatório
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label for="objetivo">Objetivo<span class="text-danger">*</span></label>
+                            <textarea id="objetivo" name="objetivo" class="form-control" rows="3"
+                                placeholder="Objetivo" formControlName="objetivo"
+                                [ngClass]="{'is-invalid': cadastroForm.get('objetivo').errors && (cadastroForm.get('objetivo').dirty || cadastroForm.get('objetivo').touched)}"></textarea>
+                            <div class="invalid-feedback">
+                                <span
+                                    *ngIf="cadastroForm.get('objetivo').errors?.required && (cadastroForm.get('objetivo').dirty || cadastroForm.get('objetivo').touched)">
+                                    Objetivo é obrigatório
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label for="tecnologias">Tecnologias<span class="text-danger">*</span></label>
+                            <textarea id="tecnologias" name="tecnologias" class="form-control" rows="3"
+                                placeholder="Tecnologias" formControlName="tecnologias"
+                                [ngClass]="{'is-invalid': cadastroForm.get('tecnologias').errors && (cadastroForm.get('tecnologias').dirty || cadastroForm.get('tecnologias').touched)}"></textarea>
+                            <div class="invalid-feedback">
+                                <span
+                                    *ngIf="cadastroForm.get('tecnologias').errors?.required && (cadastroForm.get('tecnologias').dirty || cadastroForm.get('tecnologias').touched)">
+                                    Tecnologias é obrigatório
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label for="metodologia">Metodologia<span class="text-danger">*</span></label>
+                            <textarea id="metodologia" name="metodologia" class="form-control" rows="3"
+                                placeholder="Metodologia" formControlName="metodologia"
+                                [ngClass]="{'is-invalid': cadastroForm.get('metodologia').errors && (cadastroForm.get('metodologia').dirty || cadastroForm.get('metodologia').touched)}"></textarea>
+                            <div class="invalid-feedback">
+                                <span
+                                    *ngIf="cadastroForm.get('metodologia').errors?.required && (cadastroForm.get('metodologia').dirty || cadastroForm.get('metodologia').touched)">
+                                    Metodologia é obrigatório
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-sm btn-success float-right" [disabled]="!cadastroForm.valid"><i
+                        class="fas fa-check"></i> Salvar</button>
+            </div>
+        </div>
+    </div>
+</form>

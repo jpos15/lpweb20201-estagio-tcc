@@ -6,23 +6,27 @@ import { SobreComponent } from './sobre/sobre.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { HomeInicioComponent } from './home-inicio/home-inicio.component';
-import { PropostasDeTCCComponent } from './propostas-de-tcc/propostas-de-tcc.component';
 import { PropostaDeTCCComponent } from './proposta-de-tcc/proposta-de-tcc.component';
 import { PropostaEstagioComponent } from './proposta-estagio/proposta-estagio.component';
 import { CadastrarPerfilComponent } from './perfil/cadastrar-perfil/cadastrar-perfil.component';
 import { EditarPerfilComponent } from './perfil/editar-perfil/editar-perfil.component';
+import { AbrirPropostaDeTCCComponent } from './proposta-de-tcc/abrir-proposta-de-tcc/abrir-proposta-de-tcc.component';
+import { CadastrarPropostaDeTccComponent } from './proposta-de-tcc/cadastrar-proposta-de-tcc/cadastrar-proposta-de-tcc.component';
+import { CadastrarPropostaDeEstagioComponent } from './proposta-estagio/cadastrar-proposta-de-estagio/cadastrar-proposta-de-estagio.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'propostas-de-estagio', component: PropostaEstagioComponent},
   {
     path: 'inicio', component: InicioComponent, children: [
-      { path: 'propostas-de-tcc', component: PropostasDeTCCComponent },
-      { path: 'propostas-de-tcc/:id', component: PropostaDeTCCComponent },
+      { path: 'propostas-de-estagio', component: PropostaEstagioComponent},
+      { path: 'proposta-de-estagio/cadastro', component: CadastrarPropostaDeEstagioComponent },
+
+      { path: 'propostas-de-tcc', component: PropostaDeTCCComponent },
+      { path: 'propostas-de-tcc/:id', component: AbrirPropostaDeTCCComponent },
+      { path: 'proposta-de-tcc/cadastro', component: CadastrarPropostaDeTccComponent },
       { path: 'perfil', component: PerfilComponent},
       { path: 'sobre', component: SobreComponent },
-      
       { path: '', component: HomeInicioComponent }
     ]
   },

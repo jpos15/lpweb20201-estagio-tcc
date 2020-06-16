@@ -1,27 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { PropostaDeTCCService } from '../proposta-de-tcc.service';
-import { ActivatedRoute } from '@angular/router';
 import { delay } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-proposta-de-tcc',
+  selector: 'app-propostas-de-tcc',
   templateUrl: './proposta-de-tcc.component.html',
   styleUrls: ['./proposta-de-tcc.component.css']
 })
 export class PropostaDeTCCComponent implements OnInit {
-  proposta = null;
+  propostas = null;
 
-  constructor(private proposta$: PropostaDeTCCService,
-    private route: ActivatedRoute) { }
+  constructor(private proposta$: PropostaDeTCCService) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(
-      params => {
-        this.proposta$.get(params.get('id'))
-          .pipe(delay(2000))
-          .subscribe(proposta => this.proposta = proposta);
-      }
-    );
+    this.proposta$.lista()
+      .pipe(delay(2000))
+      .subscribe(lista => this.propostas = lista);
   }
 
 }
