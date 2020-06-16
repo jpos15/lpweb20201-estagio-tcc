@@ -1,4 +1,8 @@
-<h1>Propostas de TCC</h1> <a type="button" class="btn btn-success" [routerLink]="['/inicio', 'proposta-de-tcc', 'cadastro']">Nova Proposta de TCC</a>
+<div class="flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+        <h4>Propostas de TCC</h4> <a type="button" class="btn btn-success" [routerLink]="['/inicio', 'proposta-de-tcc', 'cadastro']">Nova Proposta de TCC</a>
+    </div>
+</div>
 <p>A lista a seguir apresenta suas propostas de TCC. Clique em um item da lista para ver mais detalhes.</p>
 
 <div class="list-group" *ngIf="propostas">
