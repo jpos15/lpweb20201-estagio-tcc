@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, DEFAULT_CURRENCY_CODE, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import localePtExtra from '@angular/common/locales/extra/pt';
@@ -15,10 +15,11 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao
 import { InicioComponent } from './inicio/inicio.component';
 import { HomeInicioComponent } from './home-inicio/home-inicio.component';
 import { PropostaDeTCCComponent } from './proposta-de-tcc/proposta-de-tcc.component';
-import { PropostasDeTCCComponent } from './propostas-de-tcc/propostas-de-tcc.component';
 import { PropostaEstagioComponent } from './proposta-estagio/proposta-estagio.component';
 import { CadastrarPerfilComponent } from './perfil/cadastrar-perfil/cadastrar-perfil.component';
 import { EditarPerfilComponent } from './perfil/editar-perfil/editar-perfil.component';
+import { PropostaDeTCCAbrirComponent } from './proposta-de-tcc/proposta-de-tcc-abrir/proposta-de-tcc-abrir.component';
+import { PropostaDeTccCadastroComponent } from './proposta-de-tcc/proposta-de-tcc-cadastro/proposta-de-tcc-cadastro.component';
 
 registerLocaleData(localePt, 'pt', localePtExtra);
 
@@ -32,17 +33,19 @@ registerLocaleData(localePt, 'pt', localePtExtra);
     PaginaNaoEncontradaComponent,
     InicioComponent,
     HomeInicioComponent,
+    PropostaDeTCCAbrirComponent,
     PropostaDeTCCComponent,
-    PropostasDeTCCComponent,
     PropostaEstagioComponent,
     CadastrarPerfilComponent,
-    EditarPerfilComponent
+    EditarPerfilComponent,
+    PropostaDeTccCadastroComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

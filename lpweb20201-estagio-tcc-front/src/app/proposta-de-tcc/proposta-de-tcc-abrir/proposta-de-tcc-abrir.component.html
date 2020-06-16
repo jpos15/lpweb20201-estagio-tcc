@@ -1,0 +1,38 @@
+<div *ngIf="proposta">
+    <div class="d-flex justify-content-between">
+        <h1>{{proposta.titulo}}</h1>
+        <div>
+            <div class="badge badge-success" *ngIf="proposta.aprovada === true">Aprovada</div>
+            <div class="badge badge-warning" *ngIf="proposta.aprovada === false">Não aprovada</div>
+            <div class="badge badge-info" *ngIf="proposta.aprovada == null">Não avaliada</div>
+        </div>
+    </div>
+    <div>
+        <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+        Orientador(a): Prof(a) {{proposta.orientacao.professor.funcionario.nome}}
+    </div>
+    <div>
+
+    </div>
+
+    <hr>
+
+    <h4>Objetivo</h4>
+    <div class="text-whitespace-pre-line">{{proposta.objetivo}}</div>
+
+    <h4>Conceitos</h4>
+    <div class="text-whitespace-pre-line">{{proposta.conceitos}}</div>
+
+    <h4>Tecnologias</h4>
+    <div class="text-whitespace-pre-line">{{proposta.tecnologias}}</div>
+
+    <h4>Resultados esperados</h4>
+    <div class="text-whitespace-pre-line">{{proposta.resultados_esperados}}</div>
+
+    <h4>Metodologia</h4>
+    <div class="text-whitespace-pre-line">{{proposta.metodologia}}</div>
+</div>
+
+<div class="alert alert-info" *ngIf="!proposta">
+    <strong>Aguarde</strong>. Carregando...
+</div>

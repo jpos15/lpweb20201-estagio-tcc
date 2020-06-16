@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { PropostaEstagioService } from './proposta-estagio.service';
+import { PropostaEstagioService } from '../proposta-estagio.service';
 import { delay } from 'rxjs/operators';
+import { OrientacaoService } from '../orientacao.service';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class PropostaEstagioComponent implements OnInit {
 
   constructor(
     public proposta$: PropostaEstagioService,
+    private orientacao$: OrientacaoService,
     public auth$: AuthService,
     private router: ActivatedRoute,
     ) {
@@ -34,7 +36,7 @@ export class PropostaEstagioComponent implements OnInit {
   this.user = this.auth$.user();
 
   if(this.user){
-    this.proposta$.orientacao().subscribe(dados => {this.orientacoes = dados.results;this.encontrarOrientacao();});
+    this.orientacao$.get().subscribe(dados => {this.orientacoes = dados.results;this.encontrarOrientacao();});
   }
 
   }
