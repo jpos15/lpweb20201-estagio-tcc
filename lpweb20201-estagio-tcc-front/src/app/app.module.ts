@@ -18,8 +18,8 @@ import { PropostaDeTCCComponent } from './proposta-de-tcc/proposta-de-tcc.compon
 import { PropostaEstagioComponent } from './proposta-estagio/proposta-estagio.component';
 import { CadastrarPerfilComponent } from './perfil/cadastrar-perfil/cadastrar-perfil.component';
 import { EditarPerfilComponent } from './perfil/editar-perfil/editar-perfil.component';
-import { PropostaDeTCCAbrirComponent } from './proposta-de-tcc/proposta-de-tcc-abrir/proposta-de-tcc-abrir.component';
-import { PropostaDeTccCadastroComponent } from './proposta-de-tcc/proposta-de-tcc-cadastro/proposta-de-tcc-cadastro.component';
+import { AbrirPropostaDeTCCComponent } from './proposta-de-tcc/abrir-proposta-de-tcc/abrir-proposta-de-tcc.component';
+import { CadastrarPropostaDeTccComponent } from './proposta-de-tcc/cadastrar-proposta-de-tcc/cadastrar-proposta-de-tcc.component';
 
 registerLocaleData(localePt, 'pt', localePtExtra);
 
@@ -33,12 +33,12 @@ registerLocaleData(localePt, 'pt', localePtExtra);
     PaginaNaoEncontradaComponent,
     InicioComponent,
     HomeInicioComponent,
-    PropostaDeTCCAbrirComponent,
+    AbrirPropostaDeTCCComponent,
     PropostaDeTCCComponent,
     PropostaEstagioComponent,
     CadastrarPerfilComponent,
     EditarPerfilComponent,
-    PropostaDeTccCadastroComponent
+    CadastrarPropostaDeTccComponent
   ],
   imports: [
     BrowserModule,

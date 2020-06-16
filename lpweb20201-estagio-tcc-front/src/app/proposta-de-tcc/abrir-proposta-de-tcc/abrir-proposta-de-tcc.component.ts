@@ -5,10 +5,10 @@ import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-proposta-de-tcc-abrir',
-  templateUrl: './proposta-de-tcc-abrir.component.html',
-  styleUrls: ['./proposta-de-tcc-abrir.component.css']
+  templateUrl: './abrir-proposta-de-tcc.component.html',
+  styleUrls: ['./abrir-proposta-de-tcc.component.css']
 })
-export class PropostaDeTCCAbrirComponent implements OnInit {
+export class AbrirPropostaDeTCCComponent implements OnInit {
   proposta = null;
 
   constructor(private proposta$: PropostaDeTCCService,

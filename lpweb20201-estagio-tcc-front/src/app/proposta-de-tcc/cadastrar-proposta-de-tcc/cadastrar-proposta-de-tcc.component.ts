@@ -5,10 +5,10 @@ import { PropostaDeTCCService } from 'src/app/proposta-de-tcc.service';
 
 @Component({
   selector: 'app-proposta-de-tcc-cadastro',
-  templateUrl: './proposta-de-tcc-cadastro.component.html',
-  styleUrls: ['./proposta-de-tcc-cadastro.component.css']
+  templateUrl: './cadastrar-proposta-de-tcc.component.html',
+  styleUrls: ['./cadastrar-proposta-de-tcc.component.css']
 })
-export class PropostaDeTccCadastroComponent implements OnInit {
+export class CadastrarPropostaDeTccComponent implements OnInit {
 
   cadastroForm: FormGroup;
   propostaDeTcc: any;
