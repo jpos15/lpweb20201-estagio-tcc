@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PropostaEstagioService } from '../proposta-estagio.service';
 
 @Component({
   selector: 'app-proposta-estagio',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./proposta-estagio.component.css']
 })
 export class PropostaEstagioComponent implements OnInit {
+  propostas = null;
 
-  constructor() {
+  constructor(private proposta$: PropostaEstagioService) { }
+
+  ngOnInit(): void {
+    this.proposta$.lista()
+      .subscribe(lista => this.propostas = lista);
   }
-
- ngOnInit(): void {}
 
 }

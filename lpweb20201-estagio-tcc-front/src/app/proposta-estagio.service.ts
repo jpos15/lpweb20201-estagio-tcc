@@ -13,8 +13,15 @@ export class PropostaEstagioService {
 
   constructor(private http: HttpClient, private auth$: AuthService) { }
 
-
   cadastrar(proposta:any){
     return this.http.post(environment.API_URL.concat(`propostas-de-estagio/`), proposta, this.auth$.httpOptions());
+  }
+
+  get(id) {
+    return this.http.get(environment.API_URL.concat(`propostas-de-estagio/${id}/`), this.auth$.httpOptions());
+  }
+
+  lista() {
+    return this.http.get(environment.API_URL.concat('propostas-de-estagio/'), this.auth$.httpOptions());
   }
 }
