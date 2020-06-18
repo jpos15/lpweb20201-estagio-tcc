@@ -1,38 +1,169 @@
 <div *ngIf="proposta">
-    <div class="d-flex justify-content-between">
-        <h1>{{proposta.titulo}}</h1>
-        <div>
-            <div class="badge badge-success" *ngIf="proposta.aprovada === true">Aprovada</div>
-            <div class="badge badge-warning" *ngIf="proposta.aprovada === false">Não aprovada</div>
-            <div class="badge badge-info" *ngIf="proposta.aprovada == null">Não avaliada</div>
-        </div>
-    </div>
+  <div class="d-flex justify-content-between">
+    <h1>{{ proposta.titulo }}</h1>
     <div>
-        <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
-        Orientador(a): Prof(a) {{proposta.orientacao.professor.funcionario.nome}}
+      <div class="badge badge-success" *ngIf="proposta.aprovada === true">
+        Aprovada
+      </div>
+      <div class="badge badge-warning" *ngIf="proposta.aprovada === false">
+        Não aprovada
+      </div>
+      <div class="badge badge-info" *ngIf="proposta.aprovada == null">
+        Não avaliada
+      </div>
     </div>
-    <div>
+  </div>
+  <div>
+    <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+    Orientador(a): Prof(a) {{ proposta.orientacao.professor.funcionario.nome }}
+  </div>
+  <div></div>
 
+  <hr />
+
+  <h4>Objetivo</h4>
+  <div class="text-whitespace-pre-line">{{ proposta.objetivo }}</div>
+
+  <h4>Conceitos</h4>
+  <div class="text-whitespace-pre-line">{{ proposta.conceitos }}</div>
+
+  <h4>Tecnologias</h4>
+  <div class="text-whitespace-pre-line">{{ proposta.tecnologias }}</div>
+
+  <h4>Resultados esperados</h4>
+  <div class="text-whitespace-pre-line">
+    {{ proposta.resultados_esperados }}
+  </div>
+
+  <h4>Metodologia</h4>
+  <div class="text-whitespace-pre-line">{{ proposta.metodologia }}</div>
+
+  <h4>
+    Avaliações
+    <button id="add" data-toggle="modal" data-target="#cadastrarAvaliacao">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+  </h4>
+  <br />
+  <div *ngFor="let avaliacao of avaliacoes">
+    <div class="card w-75">
+      <div class="card-header">
+        <span
+          class="badge badge-{{
+            avaliacao.aprovada ? 'success' : 'danger'
+          }} mr-1 float-right"
+          z
+        >
+          {{ avaliacao.aprovada ? "Aprovada" : "Não aprovada" }}
+        </span>
+        <span
+          class="badge badge-{{
+            avaliacao.publicada ? 'success' : 'danger'
+          }} mr-1 float-right"
+          z
+        >
+          {{ avaliacao.publicada ? "Publicada" : "Não publicada" }}
+        </span>
+        <b>{{ avaliacao.avaliador.usuario_username }}</b>
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+          {{ avaliacao.comentario }}
+        </p>
+      </div>
+      <div class="card-header">
+        Data: {{ avaliacao.cadastrado_em | date: "dd/MM/yyyy" }} às
+        {{ avaliacao.cadastrado_em | date: "hh:mm a" }}.
+      </div>
     </div>
-
-    <hr>
-
-    <h4>Objetivo</h4>
-    <div class="text-whitespace-pre-line">{{proposta.objetivo}}</div>
-
-    <h4>Conceitos</h4>
-    <div class="text-whitespace-pre-line">{{proposta.conceitos}}</div>
-
-    <h4>Tecnologias</h4>
-    <div class="text-whitespace-pre-line">{{proposta.tecnologias}}</div>
-
-    <h4>Resultados esperados</h4>
-    <div class="text-whitespace-pre-line">{{proposta.resultados_esperados}}</div>
-
-    <h4>Metodologia</h4>
-    <div class="text-whitespace-pre-line">{{proposta.metodologia}}</div>
+    <br />
+  </div>
 </div>
 
 <div class="alert alert-info" *ngIf="!proposta">
-    <strong>Aguarde</strong>. Carregando...
+  <strong>Aguarde</strong>. Carregando...
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="cadastrarAvaliacao"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="cadastrarAvaliacaoTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Avaliar proposta</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="inlineRadioOptions"
+            id="inlineRadio1"
+            value="true"
+            [(ngModel)]="aprovada"
+          />
+          <label class="form-check-label" for="inlineRadio1">Aprovada</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="inlineRadioOptions"
+            id="inlineRadio2"
+            value="false"
+            [(ngModel)]="aprovada"
+          />
+          <label class="form-check-label" for="inlineRadio2"
+            >Não aprovada</label
+          >
+        </div>
+        <br />
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="true"
+            id="defaultCheck1"
+            [(ngModel)]="publicada"
+          />
+          <label class="form-check-label" for="defaultCheck1">
+            Publicar
+          </label>
+        </div>
+        <br />
+        <br />
+        <label for="comentario">Comentário</label>
+        <textarea
+          class="form-control"
+          id="comentario"
+          rows="3"
+          [(ngModel)]="comentario"
+        ></textarea>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="salvarAvaliacao()"
+        >
+          Salvar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
