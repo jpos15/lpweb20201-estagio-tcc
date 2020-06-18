@@ -1,1 +1,31 @@
-<p>membro-banca-propostas works!</p>
+<div class="container">
+    <h4>Adicionar membro de banca de proposta</h4>
+    <br>
+    <form #cad="ngForm">
+        <div class="form-group">
+            <label for="proposta" mr-3>Proposta:</label>
+            <select id="proposta" name="proposta" [(ngModel)]="proposta_id" required>
+              <option *ngFor=" let proposta of propostas?.results" [value]="proposta.id">
+                {{proposta.titulo}}
+              </option>        
+            </select>
+          </div>
+        <div class="form-group">
+            <label for="funcioanrio" mr-3>Membro interno:</label>
+            <select id="funcioanrio" name="funcioanrio" [(ngModel)]="funcionario_id" required>
+              <option *ngFor=" let funcionario of funcionarios?.results" [value]="funcionario.id">
+                {{funcionario.nome}}
+              </option>        
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="colaboradorexterno" mr-3>Membro externo:</label>
+            <select id="colaboradorexterno" name="colaboradorexterno" [(ngModel)]="colaboradorexterno_id" required>
+              <option *ngFor=" let colaboradorexterno of colaboradores?.results" [value]="colaboradorexterno.id">
+                {{colaboradorexterno.nome}}
+              </option>        
+            </select>
+          </div>
+    </form>
+
+</div>
