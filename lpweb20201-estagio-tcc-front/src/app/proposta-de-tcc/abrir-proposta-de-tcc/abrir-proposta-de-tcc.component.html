@@ -40,7 +40,12 @@
 
   <h4>
     Avaliações
-    <button id="add" data-toggle="modal" data-target="#cadastrarAvaliacao">
+    <button
+      *ngIf="mostrar"
+      id="add"
+      data-toggle="modal"
+      data-target="#cadastrarAvaliacao"
+    >
       <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
   </h4>

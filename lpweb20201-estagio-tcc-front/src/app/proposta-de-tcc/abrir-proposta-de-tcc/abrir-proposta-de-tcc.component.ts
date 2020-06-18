@@ -17,6 +17,7 @@ export class AbrirPropostaDeTCCComponent implements OnInit {
   aprovada: boolean;
   publicada: false;
   usuario;
+  mostrar: boolean = false;
 
   constructor(
     private proposta$: PropostaDeTCCService,
@@ -39,11 +40,20 @@ export class AbrirPropostaDeTCCComponent implements OnInit {
                 this.avaliacoes.push(result);
               }
             }
+            this.verificar();
           });
         });
     });
 
-    this.usuario = this.auth$.user();
+    this.usuario = this.auth$.usuarioDetalhes();
+  }
+
+  verificar() {
+    this.usuario.groups.find((grupo) => {
+      if (grupo.name == 'Professor') {
+        this.mostrar = true;
+      }
+    });
   }
 
   atualizaAvaliacoes() {
