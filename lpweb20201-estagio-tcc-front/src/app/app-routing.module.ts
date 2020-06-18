@@ -13,7 +13,7 @@ import { EditarPerfilComponent } from './perfil/editar-perfil/editar-perfil.comp
 import { AbrirPropostaDeTCCComponent } from './proposta-de-tcc/abrir-proposta-de-tcc/abrir-proposta-de-tcc.component';
 import { CadastrarPropostaDeTccComponent } from './proposta-de-tcc/cadastrar-proposta-de-tcc/cadastrar-proposta-de-tcc.component';
 import { CadastrarPropostaDeEstagioComponent } from './proposta-estagio/cadastrar-proposta-de-estagio/cadastrar-proposta-de-estagio.component';
-
+import {EditarPropostaDeTccComponent} from './proposta-de-tcc/cadastrar-proposta-de-tcc/editar-propostata-de-tcc.component'
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +24,7 @@ const routes: Routes = [
 
       { path: 'propostas-de-tcc', component: PropostaDeTCCComponent },
       { path: 'propostas-de-tcc/:id', component: AbrirPropostaDeTCCComponent },
+      { path: 'propostas-de-tcc/editar/:id', component: EditarPropostaDeTccComponent },
       { path: 'proposta-de-tcc/cadastro', component: CadastrarPropostaDeTccComponent },
       { path: 'perfil', component: PerfilComponent},
       { path: 'sobre', component: SobreComponent },
