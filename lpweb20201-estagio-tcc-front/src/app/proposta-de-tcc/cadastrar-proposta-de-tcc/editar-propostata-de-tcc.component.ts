@@ -58,6 +58,7 @@ export class EditarPropostaDeTccComponent implements OnInit {
       metodologia: [!this.alterar ? '' : this.propostaDeTcc.metodologia, [Validators.required]],
       membros_da_banca: [[], []]
     });
+    
     console.log(this.cadastroForm)
   }
 

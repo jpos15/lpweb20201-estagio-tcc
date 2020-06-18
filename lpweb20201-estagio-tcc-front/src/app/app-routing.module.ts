@@ -13,33 +13,49 @@ import { EditarPerfilComponent } from './perfil/editar-perfil/editar-perfil.comp
 import { AbrirPropostaDeTCCComponent } from './proposta-de-tcc/abrir-proposta-de-tcc/abrir-proposta-de-tcc.component';
 import { CadastrarPropostaDeTccComponent } from './proposta-de-tcc/cadastrar-proposta-de-tcc/cadastrar-proposta-de-tcc.component';
 import { CadastrarPropostaDeEstagioComponent } from './proposta-estagio/cadastrar-proposta-de-estagio/cadastrar-proposta-de-estagio.component';
+<<<<<<< HEAD
 import {EditarPropostaDeTccComponent} from './proposta-de-tcc/cadastrar-proposta-de-tcc/editar-propostata-de-tcc.component'
+=======
+>>>>>>> master
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
-    path: 'inicio', component: InicioComponent, children: [
-      { path: 'propostas-de-estagio', component: PropostaEstagioComponent},
-      { path: 'proposta-de-estagio/cadastro', component: CadastrarPropostaDeEstagioComponent },
+    path: 'inicio',
+    component: InicioComponent,
+    children: [
+      { path: 'propostas-de-estagio', component: PropostaEstagioComponent },
+      {
+        path: 'proposta-de-estagio/cadastro',
+        component: CadastrarPropostaDeEstagioComponent,
+      },
 
       { path: 'propostas-de-tcc', component: PropostaDeTCCComponent },
       { path: 'propostas-de-tcc/:id', component: AbrirPropostaDeTCCComponent },
+<<<<<<< HEAD
       { path: 'propostas-de-tcc/editar/:id', component: EditarPropostaDeTccComponent },
       { path: 'proposta-de-tcc/cadastro', component: CadastrarPropostaDeTccComponent },
       { path: 'perfil', component: PerfilComponent},
+=======
+      {
+        path: 'proposta-de-tcc/cadastro',
+        component: CadastrarPropostaDeTccComponent,
+      },
+      { path: 'perfil', component: PerfilComponent },
+>>>>>>> master
       { path: 'sobre', component: SobreComponent },
-      { path: '', component: HomeInicioComponent }
-    ]
+      { path: '', component: HomeInicioComponent },
+    ],
   },
-  {path: 'cadastrar-perfil',component: CadastrarPerfilComponent},
-  {path: 'editar-perfil',component: EditarPerfilComponent},
+  { path: 'cadastrar-perfil', component: CadastrarPerfilComponent },
+  { path: 'editar-perfil', component: EditarPerfilComponent },
 
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', component: PaginaNaoEncontradaComponent }
+  { path: '**', component: PaginaNaoEncontradaComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
