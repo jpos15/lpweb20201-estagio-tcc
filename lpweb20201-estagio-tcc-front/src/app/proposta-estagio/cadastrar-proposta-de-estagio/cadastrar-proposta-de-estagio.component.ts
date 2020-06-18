@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PropostaEstagioService } from 'src/app/proposta-estagio.service';
 import { OrientacaoService } from 'src/app/orientacao.service';
 import { AuthService } from 'src/app/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-proposta-de-estagio',
@@ -15,7 +15,7 @@ export class CadastrarPropostaDeEstagioComponent implements OnInit {
     private proposta$: PropostaEstagioService,
     private orientacao$: OrientacaoService,
     private auth$: AuthService,
-    private router: ActivatedRoute,) { }
+    private router: Router,) { }
 
   user: any;
   orientacao = null;
@@ -27,6 +27,14 @@ export class CadastrarPropostaDeEstagioComponent implements OnInit {
 
   error = null;
   sucesso = null;
+
+  private delay(ms: number): Promise<boolean> {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(true);
+      }, ms);
+    });
+  }
 
   ngOnInit(): void {
     this.user = this.auth$.user();
@@ -44,7 +52,10 @@ export class CadastrarPropostaDeEstagioComponent implements OnInit {
       resultados_esperados: this.resultados,
       membros_da_banca: []
     }
-    this.proposta$.cadastrar(dados).subscribe(() => { this.sucesso = true }, err => this.error = err.error);
+    this.proposta$.cadastrar(dados).subscribe(async () => { this.sucesso = true
+      await this.delay(3000)
+      await this.router.navigate(['inicio/professores/']);
+     }, err => this.error = err.error);
     console.log(dados)
   }
 
