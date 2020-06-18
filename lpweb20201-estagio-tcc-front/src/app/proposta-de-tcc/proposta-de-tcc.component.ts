@@ -18,7 +18,7 @@ export class PropostaDeTCCComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         this.proposta$.get(params.get('id'))
-          .pipe(delay(2000))
+          .pipe(delay(500))
           .subscribe(proposta => this.proposta = proposta);
       }
     );

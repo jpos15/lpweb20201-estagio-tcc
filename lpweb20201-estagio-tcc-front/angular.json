@@ -28,7 +28,8 @@
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "src/styles.css"
             ],
-            "scripts": ["node_modules/jquery/dist/jquery.slim.js",
+            "scripts": [
+              "node_modules/jquery/dist/jquery.slim.js",
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/@fortawesome/fontawesome-free/js/all.js"
@@ -125,6 +126,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "lpweb20201-estagio-tcc-front"
+    }
+  },
+  "defaultProject": "lpweb20201-estagio-tcc-front",
+  "cli": {
+    "analytics": "a499ef8c-2d72-45ac-b1c0-5620f0d13a75"
+  }
 }

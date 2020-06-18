@@ -1,3 +1,4 @@
+import { MembroBancaPropostasComponent } from './membro-banca-propostas/membro-banca-propostas.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'sobre', component: SobreComponent },
+  {path: 'membro', component: MembroBancaPropostasComponent},
   {
     path: 'inicio', component: InicioComponent, children: [
       { path: 'propostas-de-tcc', component: PropostasDeTCCComponent },

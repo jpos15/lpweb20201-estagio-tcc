@@ -14,7 +14,7 @@ export class PropostasDeTCCComponent implements OnInit {
 
   ngOnInit(): void {
     this.proposta$.lista()
-      .pipe(delay(2000))
+      .pipe(delay(500))
       .subscribe(lista => this.propostas = lista);
   }
 
