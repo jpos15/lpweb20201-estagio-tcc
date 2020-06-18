@@ -2,6 +2,7 @@
     <div class="card-header">
         <h1>Cadastro de Proposta de Estágio</h1>
     </div>
+    <br>
     <div class="alert alert-success" role="alert" *ngIf="sucesso">
         Cadastro realizado com sucesso!
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -16,12 +17,12 @@
     </div>
     <div class="card-body">
         <form action="cadastro"  #cadastro="ngForm"  (subimit)="enviarDados()">
-  
+
             <div class="col-md-6 mb-3">
                 <label>Orientação <span class="required">*</span></label>
                 <select class="form-control" name="orienta" [(ngModel)] = "orientacao" #selectOrienta="ngModel" required [class.is-invalid]="selectOrienta.invalid && (selectOrienta.dirty || selectOrienta.touched)">
                     <option></option>
-                    <option *ngFor = "let item of minhasOrientacoes" [value] = "item.id">{{item.aluno.nome}} - {{item.curso.nome}} - {{item.professor.nome}} ({{item.professor.funcao}}) - {{item.ano}}/{{item.semestre}}</option>
+                    <option *ngFor = "let item of minhasOrientacoes" [value] = "item.id">{{item.aluno.nome}} - {{item.curso.nome}} - {{item.professor.funcionario.nome}} - {{item.ano}}/{{item.semestre}}</option>
                 </select>
 
                 <small class="form-text text-muted" *ngIf="!(selectOrienta.invalid && (selectOrienta.dirty || selectOrienta.touched))">Selecione uma orientação.</small>
@@ -29,31 +30,31 @@
                     <samp *ngIf="selectOrienta.errors.required">A orientação deve ser selecionada.</samp>
                 </div>
             </div>
-  
+
             <div class="col-md-6 mb-3">
                 <label>Título <span class="required">*</span></label>
                 <input type="text" class="form-control" name="titulo" [(ngModel)]="titulo" #selectTitulo="ngModel" required [class.is-invalid]="selectTitulo.invalid && (selectTitulo.dirty || selectTitulo.touched)">
-            
+
                 <small class="form-text text-muted" *ngIf="!(selectTitulo.invalid && (selectTitulo.dirty || selectTitulo.touched))">Insira um título.</small>
                 <div *ngIf="selectTitulo.invalid && (selectTitulo.dirty || selectTitulo.touched)" class="invalid-feedbanck">
                     <samp *ngIf="selectTitulo.errors.required">O título deve ser inserido.</samp>
                 </div>
             </div>
-  
+
             <div class="col-md-6 mb-3">
                 <label>Conceitos <span class="required">*</span></label>
                 <textarea class="form-control" name="conceitos" [(ngModel)]="conceitos" #selectConceitos="ngModel" required [class.is-invalid]="selectConceitos.invalid && (selectConceitos.dirty || selectConceitos.touched)"></textarea>
-                
+
                 <small class="form-text text-muted" *ngIf="!(selectConceitos.invalid && (selectConceitos.dirty || selectConceitos.touched))">Insira os conceitos.</small>
                 <div *ngIf="selectConceitos.invalid && (selectConceitos.dirty || selectConceitos.touched)" class="invalid-feedbanck">
                     <samp *ngIf="selectConceitos.errors.required">Os conceitos devem ser inseridos.</samp>
                 </div>
             </div>
-  
+
             <div class="col-md-6 mb-3">
                 <label>Resultados Esperados <span class="required">*</span></label>
                 <textarea class="form-control" name="resultados" [(ngModel)]="resultados" #selectResultados="ngModel" required [class.is-invalid]="selectResultados.invalid && (selectResultados.dirty || selectResultados.touched)"></textarea>
-            
+
                 <small class="form-text text-muted" *ngIf="!(selectResultados.invalid && (selectResultados.dirty || selectResultados.touched))">Insira os resultados esperados.</small>
                 <div *ngIf="selectResultados.invalid && (selectResultados.dirty || selectResultados.touched)" class="invalid-feedbanck">
                     <samp *ngIf="selectResultados.errors.required">Os resultados esperados devem ser inseridos.</samp>

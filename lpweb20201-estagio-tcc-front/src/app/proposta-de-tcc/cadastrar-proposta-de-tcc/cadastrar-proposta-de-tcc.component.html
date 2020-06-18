@@ -14,7 +14,7 @@
                             [ngClass]="{'is-invalid': cadastroForm.get('orientacao_id').errors && (cadastroForm.get('orientacao_id').dirty || cadastroForm.get('orientacao_id').touched)}">
                             <option *ngFor="let item of listaOrientacoes" [value]="item.id">
                                 {{ item.id  }} - {{ item.aluno.nome }} - {{ item.curso.nome }} - {{ item.aluno.nome }} -
-                                {{ item.professor.nome }} ({{ item.professor.funcao | titlecase }}) -
+                                {{ item.professor.funcionario.nome }} ({{ item.professor.funcao | titlecase }}) -
                                 {{ item.ano }}-{{ item.semestre }} ({{ item.tipo | titlecase }})</option>
                         </select>
                         <div class="invalid-feedback">
