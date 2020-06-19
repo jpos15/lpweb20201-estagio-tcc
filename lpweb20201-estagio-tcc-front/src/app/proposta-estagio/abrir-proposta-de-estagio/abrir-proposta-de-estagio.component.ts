@@ -44,7 +44,6 @@ export class AbrirPropostaDeEstagioComponent implements OnInit {
         this.mostrarEditar = true;
       }
       if (grupo.name === 'Aluno') {
-        this.mostrar = true;
         this.mostrarEditar = true;
       }
     });
