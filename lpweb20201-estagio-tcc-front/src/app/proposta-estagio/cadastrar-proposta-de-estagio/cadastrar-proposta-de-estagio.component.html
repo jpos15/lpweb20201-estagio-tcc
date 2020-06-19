@@ -21,7 +21,6 @@
             <div class="col-md-6 mb-3">
                 <label>Orientação <span class="required">*</span></label>
                 <select class="form-control" name="orienta" [(ngModel)] = "orientacao" #selectOrienta="ngModel" required [class.is-invalid]="selectOrienta.invalid && (selectOrienta.dirty || selectOrienta.touched)">
-                    <option></option>
                     <option *ngFor = "let item of minhasOrientacoes" [value] = "item.id">{{item.aluno.nome}} - {{item.curso.nome}} - {{item.professor.funcionario.nome}} - {{item.ano}}/{{item.semestre}}</option>
                 </select>
 

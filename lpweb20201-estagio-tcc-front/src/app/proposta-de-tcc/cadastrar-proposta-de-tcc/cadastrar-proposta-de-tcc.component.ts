@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrientacaoService } from '../../orientacao.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PropostaDeTCCService } from 'src/app/proposta-de-tcc.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-proposta-de-tcc-cadastro',
@@ -14,7 +15,10 @@ export class CadastrarPropostaDeTccComponent implements OnInit {
   propostaDeTcc: any;
   listaOrientacoes: any;
 
-  constructor(private orientacao$: OrientacaoService, private propostaDeTcc$: PropostaDeTCCService, private fb: FormBuilder) { }
+  constructor(
+    private orientacao$: OrientacaoService,
+    private propostaDeTcc$: PropostaDeTCCService,
+    private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.criarFormulario();
@@ -24,7 +28,7 @@ export class CadastrarPropostaDeTccComponent implements OnInit {
   obterOrientacoes() {
     this.orientacao$.get()
       .subscribe((dados: any) => {
-        this.listaOrientacoes = dados.results;
+        this.listaOrientacoes = dados.results.filter((tipo) => tipo.tipo === "tcc");
         console.log(this.listaOrientacoes);
       });
   }
@@ -52,18 +56,18 @@ export class CadastrarPropostaDeTccComponent implements OnInit {
 
   AtualizarDadosObjeto() {
     this.propostaDeTcc = Object.assign({}, this.propostaDeTcc, this.cadastroForm.value);
-    this.propostaDeTcc.orientacao_id = parseInt(this.propostaDeTcc.orientacao_id); 
+    this.propostaDeTcc.orientacao_id = parseInt(this.propostaDeTcc.orientacao_id);
     console.log(this.propostaDeTcc);
   }
 
   adicionar() {
-      this.AtualizarDadosObjeto()
-      this.propostaDeTcc$.cadastrar(this.propostaDeTcc)
-        .subscribe(
-          (retorno: any) => {
-            console.log(retorno)
-            // this.router.navigate(['/inicio/professores']);
-          },
-          error => console.log(error))
+    this.AtualizarDadosObjeto()
+    this.propostaDeTcc$.cadastrar(this.propostaDeTcc)
+      .subscribe(
+        (retorno: any) => {
+          console.log(retorno)
+          this.router.navigate(['/inicio/propostas-de-tcc']);
+        },
+        error => console.log(error))
   }
 }

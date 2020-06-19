@@ -60,11 +60,7 @@ export class CadastrarPropostaDeEstagioComponent implements OnInit {
   }
 
   encontrarOrientacao() {
-
-
-    this.minhasOrientacoes = this.orientacoes.filter((alunoO) => alunoO.tipo === "estagio" && alunoO.aluno.id === this.user.id);
-
-
+    this.minhasOrientacoes = this.orientacoes.filter((alunoO) => alunoO.tipo === "estagio");
     console.log(this.minhasOrientacoes);
   }
 

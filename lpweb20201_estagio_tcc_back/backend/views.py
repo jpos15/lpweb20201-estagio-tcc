@@ -138,7 +138,7 @@ class OrientacaoViewSet(viewsets.ModelViewSet):
                 name__in=['Coordenação de Curso', 'Coordenação de Estágio e TCC']).exists():
             return Orientacao.objects.all()
         # se o usuário é funcionário, então retorna todas as suas orientações
-        funcionario = Funcionario.objects.filter(usuario=self.request.user)
+        funcionario = FuncionarioUsuario.objects.filter(usuario=self.request.user)
         if funcionario.exists():
             return Orientacao.objects.filter(professor__funcioonario=funcionario.first())
         # se o usuário é aluno, então retorna apenas as orientações dele
