@@ -7,10 +7,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-proposta-de-tcc-cadastro',
   templateUrl: './cadastrar-proposta-de-tcc.component.html',
-  styleUrls: ['./cadastrar-proposta-de-tcc.component.css']
+  styleUrls: ['./cadastrar-proposta-de-tcc.component.css'],
 })
 export class CadastrarPropostaDeTccComponent implements OnInit {
-
   cadastroForm: FormGroup;
   propostaDeTcc: any;
   listaOrientacoes: any;
@@ -18,7 +17,9 @@ export class CadastrarPropostaDeTccComponent implements OnInit {
   constructor(
     private orientacao$: OrientacaoService,
     private propostaDeTcc$: PropostaDeTCCService,
-    private fb: FormBuilder, private router: Router) { }
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.criarFormulario();
@@ -26,11 +27,12 @@ export class CadastrarPropostaDeTccComponent implements OnInit {
   }
 
   obterOrientacoes() {
-    this.orientacao$.get()
-      .subscribe((dados: any) => {
-        this.listaOrientacoes = dados.results.filter((tipo) => tipo.tipo === "tcc");
-        console.log(this.listaOrientacoes);
-      });
+    this.orientacao$.get().subscribe((dados: any) => {
+      this.listaOrientacoes = dados.results.filter(
+        (tipo) => tipo.tipo === 'tcc'
+      );
+      console.log(this.listaOrientacoes);
+    });
   }
 
   criarFormulario() {
@@ -42,7 +44,7 @@ export class CadastrarPropostaDeTccComponent implements OnInit {
       objetivo: ['', [Validators.required]],
       tecnologias: ['', [Validators.required]],
       metodologia: ['', [Validators.required]],
-      membros_da_banca: [[], []]
+      membros_da_banca: [[], []],
     });
   }
 
@@ -55,19 +57,23 @@ export class CadastrarPropostaDeTccComponent implements OnInit {
   }
 
   AtualizarDadosObjeto() {
-    this.propostaDeTcc = Object.assign({}, this.propostaDeTcc, this.cadastroForm.value);
-    this.propostaDeTcc.orientacao_id = parseInt(this.propostaDeTcc.orientacao_id);
-    console.log(this.propostaDeTcc);
+    this.propostaDeTcc = Object.assign(
+      {},
+      this.propostaDeTcc,
+      this.cadastroForm.value
+    );
+    this.propostaDeTcc.orientacao_id = parseInt(
+      this.propostaDeTcc.orientacao_id
+    );
   }
 
   adicionar() {
-    this.AtualizarDadosObjeto()
-    this.propostaDeTcc$.cadastrar(this.propostaDeTcc)
-      .subscribe(
-        (retorno: any) => {
-          console.log(retorno)
-          this.router.navigate(['/inicio/propostas-de-tcc']);
-        },
-        error => console.log(error))
+    this.AtualizarDadosObjeto();
+    this.propostaDeTcc$.cadastrar(this.propostaDeTcc).subscribe(
+      (retorno: any) => {
+        this.router.navigate(['/inicio/propostas-de-tcc']);
+      },
+      (error) => console.log(error)
+    );
   }
 }

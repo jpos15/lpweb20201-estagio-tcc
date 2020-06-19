@@ -21,7 +21,7 @@ import { EditarPerfilComponent } from './perfil/editar-perfil/editar-perfil.comp
 import { AbrirPropostaDeTCCComponent } from './proposta-de-tcc/abrir-proposta-de-tcc/abrir-proposta-de-tcc.component';
 import { CadastrarPropostaDeTccComponent } from './proposta-de-tcc/cadastrar-proposta-de-tcc/cadastrar-proposta-de-tcc.component';
 import { CadastrarPropostaDeEstagioComponent } from './proposta-estagio/cadastrar-proposta-de-estagio/cadastrar-proposta-de-estagio.component';
-import { EditarPropostaDeTccComponent } from './proposta-de-tcc/cadastrar-proposta-de-tcc/editar-propostata-de-tcc.component';
+import { EditarPropostaDeTccComponent } from './proposta-de-tcc/editar-proposta-tcc/editar-propostata-de-tcc.component';
 import { AbrirPropostaDeEstagioComponent } from './proposta-estagio/abrir-proposta-de-estagio/abrir-proposta-de-estagio.component';
 import { EditarPropostaDeEstagioComponent } from './proposta-estagio/editar-proposta-de-estagio/editar-proposta-de-estagio.component';
 
@@ -45,7 +45,7 @@ registerLocaleData(localePt, 'pt', localePtExtra);
     CadastrarPropostaDeEstagioComponent,
     EditarPropostaDeEstagioComponent,
     EditarPropostaDeTccComponent,
-    AbrirPropostaDeEstagioComponent
+    AbrirPropostaDeEstagioComponent,
   ],
   imports: [
     BrowserModule,
