@@ -1,3 +1,4 @@
+import { AbrirPropostaDeEstagioComponent } from './proposta-estagio/abrir-proposta-de-estagio/abrir-proposta-de-estagio.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
     path: 'inicio', component: InicioComponent, children: [
       { path: 'propostas-de-estagio', component: PropostaEstagioComponent},
       { path: 'proposta-de-estagio/cadastro', component: CadastrarPropostaDeEstagioComponent },
+      { path: 'proposta-de-estagio/:id', component: AbrirPropostaDeEstagioComponent },
 
       { path: 'propostas-de-tcc', component: PropostaDeTCCComponent },
       { path: 'propostas-de-tcc/:id', component: AbrirPropostaDeTCCComponent },

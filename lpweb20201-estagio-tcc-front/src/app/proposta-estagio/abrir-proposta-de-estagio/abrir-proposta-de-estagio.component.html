@@ -1,0 +1,119 @@
+<div *ngIf="proposta">
+    <div class="d-flex justify-content-between">
+        <div>
+            <h1>{{ proposta.titulo }}</h1>
+        </div>
+        <div>
+            <div class="badge badge-success" *ngIf="proposta.aprovada === true">Aprovada</div>
+            <div class="badge badge-warning" *ngIf="proposta.aprovada === false">Não aprovada</div>
+            <div class="badge badge-info" *ngIf="proposta.aprovada == null">Não avaliada</div>
+        </div>
+    </div>
+    <div>
+        <i class="fa fa-user-circle mr-2"></i>
+        Orientador(a): Prof(a) {{ proposta.orientacao.professor.funcionario.nome }}
+    </div>
+
+    <div class="card shadown-sm my-3">
+        <div class="card-body">
+            <h5>Orientação</h5>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <div class="font-weight-bold text-black-50">Aluno</div>
+                    <div>{{ proposta.orientacao.aluno.nome }}</div>
+                </div>
+                <div class="col">
+                    <div class="font-weight-bold text-black-50">Tipo</div>
+                    <div>{{ proposta.orientacao.tipo }}</div>
+                </div>
+                <div class="col">
+                    <div class="font-weight-bold text-black-50">Curso</div>
+                    <div>{{ proposta.orientacao.curso.nome }}</div>
+                </div>
+                <div class="col">
+                    <div class="font-weight-bold text-black-50">Ano</div>
+                    <div>{{ proposta.orientacao.ano }}</div>
+                </div>
+                <div class="col">
+                    <div class="font-weight-bold text-black-50">Semestre</div>
+                    <div>{{ proposta.orientacao.semestre }}</div>
+                </div>
+            </div>
+
+            <div class="mb-3" *ngIf="proposta.aprovada !== null">
+                <h5>Situação</h5>
+                <div class="row">
+                    <div class="col">
+                        <div class="font-weight-bold text-black-50">{{ proposta.aprovada?'Aprovado':'Reprovada' }} por</div>
+                        <div>{{ proposta.aprovada_por.username }}</div>
+                    </div>
+                    <div class="col">
+                        <div class="font-weight-bold text-black-50">Data</div>
+                        <div>{{ proposta.aprovada_em | date }}, às {{ proposta.aprovada_em | date:'h:mm a' }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h5>Conceitos</h5>
+                <div class="text-whitespace-pre-line">{{proposta.conceitos}}</div>
+            </div>
+
+            <div class="mb-3">
+                <h5>Resultados esperados</h5>
+                <div class="text-whitespace-pre-line">{{proposta.resultados_esperados}}</div>
+            </div>
+
+            <div>
+                <h5>Membros da banca</h5>
+                <ul>
+                    <li *ngFor="let membro of proposta.membros_da_banca">
+                        <div *ngIf="membro.membro_interno">
+                            #{{ membro.membro_interno.cgu }} - {{ membro.membro_interno.nome }}
+                        </div>
+                        <div *ngIf="membro.membro_externo">
+                            {{ membro.membro_externo.instituicao }} -
+                            <a href="mailto:{{ membro.membro_externo.email }}"
+                                title="Enviar mensagem" target="_blank" class="text-body">
+                                {{ membro.membro_externo.nome }}
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h2>Avaliações</h2>
+    <div *ngFor="let avaliacao of proposta.avaliacoes">
+        <div class="card mb-2">
+            <div class="card-body">
+                <div class="card-tile d-flex justify-content-between">
+                    <span><h5>{{ avaliacao.usuario.username }}</h5></span>
+                    <div>
+                        <span class="badge badge-{{avaliacao.aprovada?'success':'danger'}} mr-1">
+                            {{avaliacao.aprovada?'Aprovado':'Não aprovado'}}
+                        </span>
+                        <span class="badge badge-{{avaliacao.publicada?'success':'danger'}}">
+                            {{avaliacao.publicada?'Publicado':'Não publicado'}}
+                        </span>
+                    </div>
+                </div> <hr>
+
+                <p class="card-text">
+                    {{ avaliacao.comentario }}
+                </p>
+            </div>
+
+            <div class="card-footer">
+                <small>
+                    Avaliado em {{ avaliacao.cadastrado_em | date }}, às {{ avaliacao.cadastrado_em | date:'h:mm a' }}
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-info" *ngIf="!proposta">
+    <strong>Aguarde</strong>. Carregando...
+</div>
