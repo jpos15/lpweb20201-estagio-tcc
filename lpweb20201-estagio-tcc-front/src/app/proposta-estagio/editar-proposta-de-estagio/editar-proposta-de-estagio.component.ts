@@ -16,7 +16,6 @@ export class EditarPropostaDeEstagioComponent implements OnInit {
   titulo = null;
   conceitos = null;
   resultados = null;
-  minhasOrientacoes = null;
   orientacoes: any;
 
   error = null;
@@ -40,12 +39,6 @@ export class EditarPropostaDeEstagioComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.auth$.user();
-
-    if (this.user) {
-      this.orientacao$.get().subscribe((dados) => {
-        this.minhasOrientacoes = dados.results;
-      });
-    }
 
     this.route.params
       .pipe(
