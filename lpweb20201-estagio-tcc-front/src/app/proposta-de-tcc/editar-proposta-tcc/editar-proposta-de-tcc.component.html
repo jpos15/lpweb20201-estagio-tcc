@@ -5,46 +5,6 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-12 mb-3">
-            <label class="col-form-label custom-select-label"
-              >Orientacão<span class="text-danger">*</span></label
-            >
-            <select
-              id="orientacao_id"
-              name="orientacao_id"
-              class="form-control"
-              formControlName="orientacao_id"
-              [ngClass]="{
-                'is-invalid':
-                  cadastroForm.get('orientacao_id').errors &&
-                  (cadastroForm.get('orientacao_id').dirty ||
-                    cadastroForm.get('orientacao_id').touched)
-              }"
-            >
-              <option *ngFor="let item of listaOrientacoes" [value]="item.id">
-                {{ item.id }} - {{ item.aluno.nome }} - {{ item.curso.nome }} -
-                {{ item.aluno.nome }} -
-                {{ item.professor.funcionario.nome }} ({{
-                  item.professor.funcao | titlecase
-                }}) - {{ item.ano }}-{{ item.semestre }} ({{
-                  item.tipo | titlecase
-                }})</option
-              >
-            </select>
-            <div class="invalid-feedback">
-              <span
-                *ngIf="
-                  cadastroForm.get('orientacao_id').errors?.required &&
-                  (cadastroForm.get('orientacao_id').dirty ||
-                    cadastroForm.get('orientacao_id').touched)
-                "
-              >
-                Orientacão é obrigatório
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 mb-3">
             <div class="form-group">
               <label for="titulo"
                 >Título<span class="text-danger">*</span></label

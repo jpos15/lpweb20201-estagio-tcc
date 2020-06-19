@@ -7,22 +7,19 @@ import { PropostaEstagioService } from 'src/app/proposta-estagio.service';
 @Component({
   selector: 'app-editar-proposta-de-estagio',
   templateUrl: './editar-proposta-de-estagio.component.html',
-  styleUrls: ['./editar-proposta-de-estagio.component.css']
+  styleUrls: ['./editar-proposta-de-estagio.component.css'],
 })
 export class EditarPropostaDeEstagioComponent implements OnInit {
-
   user: any;
   idProposta = null;
   orientacao = null;
   titulo = null;
   conceitos = null;
   resultados = null;
-  minhasOrientacoes = null;
   orientacoes: any;
 
   error = null;
   sucesso = null;
-
 
   constructor(
     private proposta$: PropostaEstagioService,
@@ -30,10 +27,10 @@ export class EditarPropostaDeEstagioComponent implements OnInit {
     private orientacao$: OrientacaoService,
     private auth$: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   private delay(ms: number): Promise<boolean> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         resolve(true);
       }, ms);
@@ -41,21 +38,14 @@ export class EditarPropostaDeEstagioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.user = this.auth$.user();
 
-    if (this.user) {
-      this.orientacao$.get().subscribe(
-        dados => { this.minhasOrientacoes = dados.results; },
-      );
-    }
-
-    this.route.params.pipe(
-      map((params: any) => params['id']),
-      switchMap(id => this.proposta$.get(id))
-    )
-      .subscribe(proposta => this.getProposta(proposta));
-
+    this.route.params
+      .pipe(
+        map((params: any) => params['id']),
+        switchMap((id) => this.proposta$.get(id))
+      )
+      .subscribe((proposta) => this.getProposta(proposta));
   }
 
   getProposta(proposta) {
@@ -68,22 +58,20 @@ export class EditarPropostaDeEstagioComponent implements OnInit {
   }
 
   enviarDados() {
-
     let dados = {
       orientacao_id: this.orientacao,
       titulo: this.titulo,
       conceitos: this.conceitos,
       resultados_esperados: this.resultados,
-      membros_da_banca: []
+      membros_da_banca: [],
     };
-    console.log(this.idProposta);
-    this.proposta$.editar(dados, this.idProposta).subscribe(async () => {
-      this.sucesso = true;
-      await this.delay(3000)
-      await this.router.navigate(['inicio/propostas-de-estagio/']);
-    }, err => this.error = err.error);
-
-
+    this.proposta$.editar(dados, this.idProposta).subscribe(
+      async () => {
+        this.sucesso = true;
+        await this.delay(3000);
+        await this.router.navigate(['inicio/propostas-de-estagio/']);
+      },
+      (err) => (this.error = err.error)
+    );
   }
-
 }
