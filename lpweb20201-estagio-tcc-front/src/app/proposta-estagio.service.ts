@@ -17,6 +17,11 @@ export class PropostaEstagioService {
     return this.http.post(environment.API_URL.concat(`propostas-de-estagio/`), proposta, this.auth$.httpOptions());
   }
 
+  editar(proposta,id){
+  
+    return this.http.put(environment.API_URL.concat(`propostas-de-estagio/${id}/`),proposta, this.auth$.httpOptions());
+  }
+
   get(id) {
     return this.http.get(environment.API_URL.concat(`propostas-de-estagio/${id}/`), this.auth$.httpOptions());
   }
