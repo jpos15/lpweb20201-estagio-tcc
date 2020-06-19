@@ -1,9 +1,9 @@
 <div *ngIf="proposta">
-  <div class="d-flex justify-content-between">
-    <div>
+  <div class="row">
+    <div class="col">
       <h1>{{ proposta.titulo }}</h1>
     </div>
-    <div>
+    <div class="col-2 pr-0 align-self-center">
       <div class="badge badge-success" *ngIf="proposta.aprovada === true">
         Aprovada
       </div>
@@ -13,6 +13,9 @@
       <div class="badge badge-info" *ngIf="proposta.aprovada == null">
         Não avaliada
       </div>
+      <a class="justify-content-end" [routerLink]="['/inicio', 'proposta-de-estagio', 'editar', proposta.id]">
+        <button class="ml-2 btn btn-sm btn-success">Editar</button>
+      </a>
     </div>
   </div>
   <div>

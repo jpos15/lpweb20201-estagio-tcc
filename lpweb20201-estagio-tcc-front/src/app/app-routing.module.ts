@@ -15,6 +15,7 @@ import { AbrirPropostaDeTCCComponent } from './proposta-de-tcc/abrir-proposta-de
 import { CadastrarPropostaDeTccComponent } from './proposta-de-tcc/cadastrar-proposta-de-tcc/cadastrar-proposta-de-tcc.component';
 import { CadastrarPropostaDeEstagioComponent } from './proposta-estagio/cadastrar-proposta-de-estagio/cadastrar-proposta-de-estagio.component';
 import {EditarPropostaDeTccComponent} from './proposta-de-tcc/cadastrar-proposta-de-tcc/editar-propostata-de-tcc.component'
+import { EditarPropostaDeEstagioComponent } from './proposta-estagio/editar-proposta-de-estagio/editar-proposta-de-estagio.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
     path: 'inicio', component: InicioComponent, children: [
       { path: 'propostas-de-estagio', component: PropostaEstagioComponent},
       { path: 'proposta-de-estagio/cadastro', component: CadastrarPropostaDeEstagioComponent },
+      { path: 'proposta-de-estagio/editar/:id', component: EditarPropostaDeEstagioComponent },
       { path: 'proposta-de-estagio/:id', component: AbrirPropostaDeEstagioComponent },
 
       { path: 'propostas-de-tcc', component: PropostaDeTCCComponent },
