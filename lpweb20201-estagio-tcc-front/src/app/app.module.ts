@@ -41,10 +41,7 @@ registerLocaleData(localePt, 'pt', localePtExtra);
     EditarPerfilComponent,
     CadastrarPropostaDeTccComponent,
     CadastrarPropostaDeEstagioComponent,
-<<<<<<< HEAD
     EditarPropostaDeTccComponent
-=======
->>>>>>> master
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrientacaoService } from '../../orientacao.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PropostaDeTCCService } from 'src/app/proposta-de-tcc.service';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { delay } from 'rxjs/operators';
 
 @Component({
@@ -18,7 +18,7 @@ export class EditarPropostaDeTccComponent implements OnInit {
   propost_id: any;
   alterar: boolean = false;
 
-  constructor(private orientacao$: OrientacaoService, private route: ActivatedRoute, private propostaDeTcc$: PropostaDeTCCService, private fb: FormBuilder) { 
+  constructor(private orientacao$: OrientacaoService, private route: ActivatedRoute, private propostaDeTcc$: PropostaDeTCCService, private fb: FormBuilder, private routerLink:Router) { 
     this.propost_id =  this.route.snapshot.params.id;
   }
 
@@ -81,7 +81,7 @@ export class EditarPropostaDeTccComponent implements OnInit {
         .subscribe(
           (retorno: any) => {
             console.log(retorno)
-            // this.router.navigate(['/inicio/professores']);
+            this.routerLink.navigate([`/inicio/propostas-de-tcc/${this.propost_id}`]);
           },
           error => console.log(error))
   }
