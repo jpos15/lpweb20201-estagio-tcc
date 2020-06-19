@@ -12,7 +12,7 @@ export class MembroService {
   constructor(private http: HttpClient, private auth$: AuthService) { }
 
   lista() {
-    return this.http.get(environment.API_URL.concat('membro/'), this.auth$.httpOptions());
+    return this.http.get(environment.API_URL.concat('propostas-de-tcc/'), this.auth$.httpOptions());
   }
 
   cadastrar(proposta_id, funcionario_id, colaboradorexterno_id){
@@ -21,7 +21,7 @@ export class MembroService {
       funcionario_id,
       colaboradorexterno_id
     };
-    return this.http.post(environment.API_URL.concat('membro/'), membro, this.auth$.httpOptions())
+    return this.http.post(environment.API_URL.concat('propostas-de-tcc/'), membro, this.auth$.httpOptions())
       .pipe(
         map(data => this.updateData(data)),
         tap(user => {
@@ -30,6 +30,7 @@ export class MembroService {
       )
   }
 
+  
   private updateData(data) {
     const token = data['token'];
     const token_parts = token.split(/\./);

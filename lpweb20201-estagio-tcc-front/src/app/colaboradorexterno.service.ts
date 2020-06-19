@@ -13,7 +13,7 @@ export class ColaboradorexternoService {
   constructor(private http: HttpClient,private auth$: AuthService) { }
 
   getColaboradores(){
-    return this.http.get(environment.API_URL.concat('colaboradorexterno/'),this.auth$.httpOptions());
+    return this.http.get(environment.API_URL.concat('colaboradores-externos/'),this.auth$.httpOptions());
   }
 
 }

@@ -5,6 +5,7 @@ import { FuncionarioService } from './../funcionario.service';
 import { ColaboradorexternoService } from '../colaboradorexterno.service';
 import { delay } from 'rxjs/operators';
 import { error } from '@angular/compiler/src/util';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-membro-banca-propostas',
   templateUrl: './membro-banca-propostas.component.html',
@@ -12,22 +13,28 @@ import { error } from '@angular/compiler/src/util';
 })
 export class MembroBancaPropostasComponent implements OnInit {
 
+  prop= null;
+
   membros: any;
-  propostas: any;
   funcionarios: any;
   colaboradores: any;
 
   proposta_id: any;
+  propostas:any;
   funcionario_id: any;
   colaboradorexterno_id: any;
 
-  constructor(private membro: MembroService, private proposta: PropostaDeTCCService, private funcionario: FuncionarioService, private colaborador: ColaboradorexternoService) { }
+  constructor(private membro: MembroService, private proposta: PropostaDeTCCService, private funcionario: FuncionarioService, private colaborador: ColaboradorexternoService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.pesquisar();
-    this.pesquisarProposta();
-    this.pesquisarFuncionario();
-    this.pesquisarColaboradorExterno();
+    this.route.paramMap.subscribe(
+      params => {
+        this.proposta.cadastrarMembro('dados', 'id')
+          .pipe(delay(500))
+          .subscribe(proposta => this.prop = proposta);
+          this.pesquisarProposta();
+      }
+    );
   }
 
   pesquisar() {
@@ -54,6 +61,7 @@ export class MembroBancaPropostasComponent implements OnInit {
     .subscribe(dados => this.colaboradores = dados);
   }
 
+  
   salvar(){
     this.membro.cadastrar(this.proposta_id, this.funcionario_id, this.colaboradorexterno_id)
     .subscribe(retorno => {

@@ -1,7 +1,7 @@
 <div class="container">
     <h4>Adicionar membro de banca de proposta</h4>
     <br>
-    <form #cad="ngForm">
+    <form #cadastro="ngForm" (submit)="salvar()">
         <div class="form-group">
             <label for="proposta" mr-3>Proposta:</label>
             <select id="proposta" name="proposta" [(ngModel)]="proposta_id" required>
@@ -26,6 +26,7 @@
               </option>        
             </select>
           </div>
+          <button class="btn btn-primary mr-2" [disabled]="cadastro.invalid">Salvar</button>
     </form>
 
 </div>
