@@ -42,17 +42,7 @@ export class EditarPropostaDeTccComponent implements OnInit {
           console.error(erro);
         }
       );
-
-    // this.obterOrientacoes();
   }
-
-  // obterOrientacoes() {
-  //   this.orientacao$.get()
-  //     .pipe(delay(1000))
-  //     .subscribe((dados: any) => {
-  //       this.listaOrientacoes = dados.results;
-  //     });
-  // }
 
   criarFormulario() {
     this.cadastroForm = this.fb.group({
@@ -86,7 +76,6 @@ export class EditarPropostaDeTccComponent implements OnInit {
       ],
       membros_da_banca: [[], []],
     });
-    console.log(this.cadastroForm);
   }
 
   onSubmit() {
@@ -106,7 +95,6 @@ export class EditarPropostaDeTccComponent implements OnInit {
     this.propostaDeTcc.orientacao_id = parseInt(
       this.propostaDeTcc.orientacao_id
     );
-    console.log(this.propostaDeTcc);
   }
 
   adicionar() {
