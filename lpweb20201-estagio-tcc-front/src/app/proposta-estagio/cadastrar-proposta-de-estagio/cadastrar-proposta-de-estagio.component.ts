@@ -52,10 +52,10 @@ export class CadastrarPropostaDeEstagioComponent implements OnInit {
       resultados_esperados: this.resultados,
       membros_da_banca: []
     }
-    this.proposta$.cadastrar(dados).subscribe(async () => { this.sucesso = true
-      await this.delay(3000)
-      await this.router.navigate(['inicio/professores/']);
-     }, err => this.error = err.error);
+    this.proposta$.cadastrar(dados).subscribe(() => {
+      this.sucesso = true;
+      this.router.navigate(['inicio/propostas-de-estagio']);
+    }, err => this.error = err.error);
     console.log(dados)
   }
 

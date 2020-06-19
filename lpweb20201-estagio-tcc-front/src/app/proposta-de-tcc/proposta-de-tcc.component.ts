@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PropostaDeTCCService } from '../proposta-de-tcc.service';
 import { delay } from 'rxjs/operators';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-propostas-de-tcc',
@@ -9,13 +10,27 @@ import { delay } from 'rxjs/operators';
 })
 export class PropostaDeTCCComponent implements OnInit {
   propostas = null;
+  usuario: any;
+  mostrar: boolean = false;
 
-  constructor(private proposta$: PropostaDeTCCService) { }
+  constructor(
+    private proposta$: PropostaDeTCCService,
+    private auth$: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.proposta$.lista()
-      .pipe(delay(2000))
       .subscribe(lista => this.propostas = lista);
+    this.usuario = this.auth$.usuarioDetalhes();
+    this.verificar();
+  }
+
+  verificar() {
+    this.usuario.groups.find((grupo) => {
+      if (grupo.name === 'Aluno') {
+        this.mostrar = true;
+      }
+    });
   }
 
 }

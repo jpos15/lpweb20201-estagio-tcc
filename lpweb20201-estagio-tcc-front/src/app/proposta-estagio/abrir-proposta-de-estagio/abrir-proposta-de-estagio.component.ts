@@ -18,6 +18,7 @@ export class AbrirPropostaDeEstagioComponent implements OnInit {
   publicada: false;
   usuario;
   mostrar: boolean = false;
+  mostrarEditar: boolean = false;
 
   constructor(
     private propostaEstagio: PropostaEstagioService,
@@ -38,8 +39,13 @@ export class AbrirPropostaDeEstagioComponent implements OnInit {
 
   verificar() {
     this.usuario.groups.find((grupo) => {
-      if (grupo.name == 'Professor') {
+      if (grupo.name === 'Professor') {
         this.mostrar = true;
+        this.mostrarEditar = true;
+      }
+      if (grupo.name === 'Aluno') {
+        this.mostrar = true;
+        this.mostrarEditar = true;
       }
     });
   }
