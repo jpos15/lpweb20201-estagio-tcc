@@ -14,7 +14,7 @@
         Não avaliada
       </div>
       <a class="justify-content-end" [routerLink]="['/inicio', 'proposta-de-estagio', 'editar', proposta.id]">
-        <button class="ml-2 btn btn-sm btn-success">Editar</button>
+        <button class="ml-2 btn btn-sm btn-primary" *ngIf="mostrar || mostrarEditar">Editar</button>
       </a>
     </div>
   </div>

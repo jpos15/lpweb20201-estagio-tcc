@@ -20,7 +20,7 @@
                         <div class="invalid-feedback">
                             <span
                                 *ngIf="cadastroForm.get('orientacao_id').errors?.required && (cadastroForm.get('orientacao_id').dirty || cadastroForm.get('orientacao_id').touched)">
-                                Curso é obrigatório
+                                Orientacão é obrigatório
                             </span>
                         </div>
                     </div>
@@ -60,9 +60,10 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <div class="form-group">
-                            <label for="resultados_esperados">Resultados esperados<span class="text-danger">*</span></label>
-                            <textarea id="resultados_esperados" name="resultados_esperados" class="form-control" rows="3"
-                                placeholder="Resultados esperados" formControlName="resultados_esperados"
+                            <label for="resultados_esperados">Resultados esperados<span
+                                    class="text-danger">*</span></label>
+                            <textarea id="resultados_esperados" name="resultados_esperados" class="form-control"
+                                rows="3" placeholder="Resultados esperados" formControlName="resultados_esperados"
                                 [ngClass]="{'is-invalid': cadastroForm.get('resultados_esperados').errors && (cadastroForm.get('resultados_esperados').dirty || cadastroForm.get('resultados_esperados').touched)}"></textarea>
                             <div class="invalid-feedback">
                                 <span
@@ -77,8 +78,8 @@
                     <div class="col-md-12 mb-3">
                         <div class="form-group">
                             <label for="objetivo">Objetivo<span class="text-danger">*</span></label>
-                            <textarea id="objetivo" name="objetivo" class="form-control" rows="3"
-                                placeholder="Objetivo" formControlName="objetivo"
+                            <textarea id="objetivo" name="objetivo" class="form-control" rows="3" placeholder="Objetivo"
+                                formControlName="objetivo"
                                 [ngClass]="{'is-invalid': cadastroForm.get('objetivo').errors && (cadastroForm.get('objetivo').dirty || cadastroForm.get('objetivo').touched)}"></textarea>
                             <div class="invalid-feedback">
                                 <span
@@ -106,7 +107,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 mb-3">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="metodologia">Metodologia<span class="text-danger">*</span></label>
                             <textarea id="metodologia" name="metodologia" class="form-control" rows="3"
@@ -122,9 +123,10 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-sm btn-success float-right" [disabled]="!cadastroForm.valid"><i
-                        class="fas fa-check"></i> Salvar</button>
+            <div class="col-md-12 mb-3">
+                <button type="submit" class="btn btn-success float-right" [disabled]="!cadastroForm.valid"><i
+                        class="fas fa-check"></i>Cadastrar</button>
+                <button type="reset" class="btn btn-secondary mr-2 float-right">Limpar</button>
             </div>
         </div>
     </div>

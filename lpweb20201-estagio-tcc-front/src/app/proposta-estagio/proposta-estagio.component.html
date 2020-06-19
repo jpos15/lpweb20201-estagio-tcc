@@ -1,7 +1,7 @@
 <div class="flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
         <h4>Propostas de Estágio</h4>
-        <a type="button" class="btn btn-success" [routerLink]="['/inicio', 'proposta-de-estagio', 'cadastro']">
+        <a type="button" class="btn btn-success" [routerLink]="['/inicio', 'proposta-de-estagio', 'cadastro']" *ngIf="mostrar">
             Nova Proposta de Estágio
         </a>
     </div>
