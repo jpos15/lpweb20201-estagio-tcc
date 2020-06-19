@@ -241,7 +241,7 @@ class PropostaDeEstagioSerializer(serializers.ModelSerializer):
                                                        required=True)
     orientacao = OrientacaoSerializer(read_only=True)
     membros_da_banca = MembroDeBancaSerializer(many=True)
-    avaliacoes = AvaliacaoDePropostaSerializer(many=True)
+    avaliacoes = AvaliacaoDePropostaSerializer(read_only=True, many=True)
     aprovada_por = UserSerializer(read_only=True)
     aprovada_por_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), write_only=True, required=False)
 

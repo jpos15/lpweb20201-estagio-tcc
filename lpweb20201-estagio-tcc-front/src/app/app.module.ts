@@ -25,7 +25,6 @@ import { AbrirPropostaDeEstagioComponent } from './proposta-estagio/abrir-propos
 
 registerLocaleData(localePt, 'pt', localePtExtra);
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,16 +48,18 @@ registerLocaleData(localePt, 'pt', localePtExtra);
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     {
-      provide: LOCALE_ID, useValue: 'pt'
+      provide: LOCALE_ID,
+      useValue: 'pt',
     },
     {
-      provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL'
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: 'BRL',
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

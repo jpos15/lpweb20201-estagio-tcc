@@ -15,7 +15,6 @@ import { AbrirPropostaDeTCCComponent } from './proposta-de-tcc/abrir-proposta-de
 import { CadastrarPropostaDeTccComponent } from './proposta-de-tcc/cadastrar-proposta-de-tcc/cadastrar-proposta-de-tcc.component';
 import { CadastrarPropostaDeEstagioComponent } from './proposta-estagio/cadastrar-proposta-de-estagio/cadastrar-proposta-de-estagio.component';
 
-
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
@@ -26,21 +25,24 @@ const routes: Routes = [
 
       { path: 'propostas-de-tcc', component: PropostaDeTCCComponent },
       { path: 'propostas-de-tcc/:id', component: AbrirPropostaDeTCCComponent },
-      { path: 'proposta-de-tcc/cadastro', component: CadastrarPropostaDeTccComponent },
-      { path: 'perfil', component: PerfilComponent},
+      {
+        path: 'proposta-de-tcc/cadastro',
+        component: CadastrarPropostaDeTccComponent,
+      },
+      { path: 'perfil', component: PerfilComponent },
       { path: 'sobre', component: SobreComponent },
-      { path: '', component: HomeInicioComponent }
-    ]
+      { path: '', component: HomeInicioComponent },
+    ],
   },
-  {path: 'cadastrar-perfil',component: CadastrarPerfilComponent},
-  {path: 'editar-perfil',component: EditarPerfilComponent},
+  { path: 'cadastrar-perfil', component: CadastrarPerfilComponent },
+  { path: 'editar-perfil', component: EditarPerfilComponent },
 
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', component: PaginaNaoEncontradaComponent }
+  { path: '**', component: PaginaNaoEncontradaComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

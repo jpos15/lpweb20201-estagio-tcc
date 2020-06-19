@@ -1,7 +1,26 @@
 .text-whitespace-pre-line {
-    white-space: pre-line;
+  white-space: pre-line;
 }
 
 h4 {
-    margin-top: 20px;
+  margin-top: 20px;
+}
+
+.fa-plus {
+  color: #83ff5b;
+  font-size: small;
+  margin-bottom: 5px;
+}
+
+#add {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+#add:active,
+#add:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: white;
 }

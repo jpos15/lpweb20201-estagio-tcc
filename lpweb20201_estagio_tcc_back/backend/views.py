@@ -162,11 +162,15 @@ class PropostaDeEstagioViewSet(viewsets.ModelViewSet):
         # se o usuário é professor, então retorna as propostas em que ele é membro da banca
         if self.request.user.groups.filter(name__in=['Professor']):
             # obtem o funcionario referente ao usuario
-            funcionario = Funcionario.objects.filter(usuario__usuario=self.request.user)
+            funcionario = Funcionario.objects.filter(
+                usuario__usuario=self.request.user)
             if funcionario.exists():
+                if not PropostaDeEstagio.objects.filter(membros_da_banca__membro_interno__in=[funcionario.first()]):
+                    return PropostaDeEstagio.objects.filter(orientacao__professor__funcionario__in=[funcionario.first()])
                 return PropostaDeEstagio.objects.filter(membros_da_banca__membro_interno__in=[funcionario.first()])
             # obtem o colaborador externo referente ao usuario
-            colaborador = ColaboradorExterno.objects.filter(usuario__usuario=self.request.user)
+            colaborador = ColaboradorExterno.objects.filter(
+                usuario__usuario=self.request.user)
             if colaborador.exists():
                 return PropostaDeEstagio.objects.filter(membros_da_banca__membro_externo__in=[colaborador.first()])
         # se o usuário é aluno, então retorna apenas as orientações dele
@@ -190,11 +194,15 @@ class PropostaDeTCCViewSet(viewsets.ModelViewSet):
         # se o usuário é professor, então retorna as propostas em que ele é orientador ou membro da banca
         if self.request.user.groups.filter(name__in=['Professor']):
             # obtem o funcionario referente ao usuario
-            funcionario = Funcionario.objects.filter(usuario__usuario=self.request.user)
+            funcionario = Funcionario.objects.filter(
+                usuario__usuario=self.request.user)
             if funcionario.exists():
+                if not PropostaDeTCC.objects.filter(membros_da_banca__membro_interno__in=[funcionario.first()]):
+                    return PropostaDeTCC.objects.filter(orientacao__professor__funcionario__in=[funcionario.first()])
                 return PropostaDeTCC.objects.filter(membros_da_banca__membro_interno__in=[funcionario.first()])
             # obtem o colaborador externo referente ao usuario
-            colaborador = ColaboradorExterno.objects.filter(usuario__usuario=self.request.user)
+            colaborador = ColaboradorExterno.objects.filter(
+                usuario__usuario=self.request.user)
             if colaborador.exists():
                 return PropostaDeEstagio.objects.filter(membros_da_banca__membro_externo__in=[colaborador.first()])
         # se o usuário é aluno, então retorna apenas as orientações dele
