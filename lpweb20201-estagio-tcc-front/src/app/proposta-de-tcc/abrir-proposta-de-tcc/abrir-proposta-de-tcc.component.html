@@ -11,17 +11,29 @@
       <div class="badge badge-info" *ngIf="proposta.aprovada == null">
         Não avaliada
       </div>
-      <a class="justify-content-end" routerLink="/inicio/propostas-de-tcc/editar/{{proposta.id}}"
-    routerLinkActive="active" *ngIf="mostrar || mostrarEditar"><button class="ml-2 btn btn-sm btn-primary">Editar</button></a>
     </div>
   </div>
-  <div>
-    <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
-    Orientador(a): Prof(a) {{ proposta.orientacao.professor.funcionario.nome }}
+  <div class="d-flex justify-content-between">
+    <p class="mt-2"> <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+      Orientador(a): Prof(a) {{ proposta.orientacao.professor.funcionario.nome }}</p>
+    <a class="justify-content-end" routerLink="/inicio/propostas-de-tcc/editar/{{proposta.id}}"
+      routerLinkActive="active" *ngIf="mostrar || mostrarEditar"><button
+        class="ml-2 btn btn-sm btn-primary">Editar</button></a>
   </div>
+
+  <div class="d-flex justify-content-between">
+    <p class="mt-2"> <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+      Aluno(a): {{ proposta.orientacao.aluno.nome }}</p>
+  </div>
+
   <div></div>
 
   <hr />
+
+  <div class="btn-group float-right" role="group" aria-label="Basic example" *ngIf="proposta.aprovada === null && mostarAprovar">
+    <button type="button" class="btn btn-sm btn-outline-success" (click)="aprovar(true)">Aprovar</button>
+    <button type="button" class="btn btn-sm btn-outline-warning" (click)="aprovar(false)">Não aprovar</button>
+  </div>
 
   <h4>Objetivo</h4>
   <div class="text-whitespace-pre-line">{{ proposta.objetivo }}</div>
