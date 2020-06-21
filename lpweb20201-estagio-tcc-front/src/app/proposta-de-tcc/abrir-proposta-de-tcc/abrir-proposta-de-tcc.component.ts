@@ -19,34 +19,33 @@ export class AbrirPropostaDeTCCComponent implements OnInit {
   usuario;
   mostrar: boolean = false;
   mostrarEditar: boolean = false;
+  mostarAprovar: boolean = false;
 
   constructor(
     private proposta$: PropostaDeTCCService,
     private route: ActivatedRoute,
     private avaliacao$: AvaliacaoService,
     private auth$: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      this.proposta$
-        .get(params.get('id'))
-        .pipe(delay(100))
-        .subscribe((proposta) => {
-          this.proposta = proposta;
-
-          this.avaliacao$.avaliacoes().subscribe((data: any) => {
-            for (let result of data.results) {
-              if (result.proposta == this.proposta.id) {
-                this.avaliacoes.push(result);
-              }
-            }
-            this.verificar();
-          });
-        });
+      this.obterProposta(params.get('id'));
     });
 
     this.usuario = this.auth$.usuarioDetalhes();
+  }
+
+  obterProposta(id) {
+    this.proposta$.get(id)
+      .subscribe((proposta) => {
+        this.proposta = proposta;
+
+        this.avaliacao$.avaliacoes().subscribe((data: any) => {
+          this.avaliacoes = data.results;
+          this.verificar();
+        });
+      });
   }
 
   verificar() {
@@ -57,6 +56,9 @@ export class AbrirPropostaDeTCCComponent implements OnInit {
       }
       if (grupo.name === 'Aluno') {
         this.mostrarEditar = true;
+      }
+      if (grupo.name === 'Coordenação de Estágio e TCC') {
+        this.mostarAprovar = true;
       }
     });
   }
@@ -87,6 +89,16 @@ export class AbrirPropostaDeTCCComponent implements OnInit {
         this.comentario = null;
         this.aprovada = null;
         this.atualizaAvaliacoes();
+      });
+  }
+
+  aprovar(aprovar: boolean) {
+    this.proposta.aprovada = aprovar;
+    this.proposta.orientacao_id = this.proposta.orientacao.id;
+
+    this.proposta$.update(this.proposta, this.proposta.id)
+      .subscribe((data) => {
+        console.log(data);
       });
   }
 }
