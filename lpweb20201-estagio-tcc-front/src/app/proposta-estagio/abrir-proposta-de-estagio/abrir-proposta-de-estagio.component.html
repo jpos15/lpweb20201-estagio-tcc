@@ -2,10 +2,20 @@
   <div class="d-flex justify-content-between">
     <h1>{{ proposta.titulo }}</h1>
 
-    <a class="align-self-center" [routerLink]="['/inicio', 'proposta-de-estagio', 'editar', proposta.id]">
-      <button class="ml-2 btn btn-sm btn-primary" *ngIf="mostrar || mostrarEditar">Editar</button>
-    </a>
+    <div *ngIf="proposta.aprovada === null && mostrarAprovar">
+      <div class="btn-group float-right">
+        <button type="button" class="btn btn-sm btn-success" (click)="aprovar(true)">Aprovar</button>
+        <button type="button" class="btn btn-sm btn-outline-danger" (click)="aprovar(false)">Não aprovar</button>
+      </div>
+    </div>
+
+    <div *ngIf="mostrar || mostrarEditar">
+      <a class="align-self-center" [routerLink]="['/inicio', 'proposta-de-estagio', 'editar', proposta.id]">
+        <button class="ml-2 btn btn-sm btn-primary">Editar</button>
+      </a>
+    </div>
   </div>
+
 
   <div class="card shadown-sm my-3">
     <div class="card-body">
@@ -59,7 +69,7 @@
             <div class="font-weight-bold text-black-50">
               {{ proposta.aprovada ? "Aprovado" : "Reprovada" }} por
             </div>
-            <div>{{ proposta.aprovada_por.username }}</div>
+            <div>{{ proposta.aprovada_por?.username }}</div>
           </div>
           <div class="col">
             <div class="font-weight-bold text-black-50">Data</div>

@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PropostaDeTCCService } from 'src/app/proposta-de-tcc.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
+import { FuncionarioService } from 'src/app/funcionario.service';
+import { ColaboradorExternoService } from 'src/app/colaborador-externo.service';
 
 @Component({
   selector: 'app-proposta-de-tcc-cadastro',
@@ -16,11 +18,15 @@ export class EditarPropostaDeTccComponent implements OnInit {
   listaOrientacoes: any;
   propost_id: any;
   alterar: boolean = false;
+  listaFuncionario: any;
+  listaColaboradorExterno: any;
 
   constructor(
     private orientacao$: OrientacaoService,
     private route: ActivatedRoute,
     private propostaDeTcc$: PropostaDeTCCService,
+    private funcionario$: FuncionarioService,
+    private colaboradorExterno$: ColaboradorExternoService,
     private fb: FormBuilder,
     private router: Router
   ) {
@@ -31,17 +37,45 @@ export class EditarPropostaDeTccComponent implements OnInit {
     this.criarFormulario();
     this.propostaDeTcc$
       .get(this.propost_id)
-      .pipe(delay(1000))
       .subscribe(
-        (dados) => {
+        (dados: any) => {
           this.propostaDeTcc = dados;
           this.alterar = true;
+
           this.criarFormulario();
+
+          this.separarMembroDaBanca(dados.membros_da_banca);
         },
         (erro) => {
           console.error(erro);
         }
       );
+
+    this.funcionario$.lista().subscribe((data: any) => {
+      console.log('Funcionarios', data.results);
+      this.listaFuncionario = data.results;
+    });
+    this.colaboradorExterno$.lista().subscribe((data: any) => {
+      console.log('Colaboradores externos', data.results);
+      this.listaColaboradorExterno = data.results;
+    });
+  }
+
+  separarMembroDaBanca(membros: any[]) {
+    const membroInterno = [];
+    const membroExterno = [];
+
+    membros.map((data) => {
+      if (data.membro_externo != null) {
+        membroExterno.push(data.membro_externo.id);
+      }
+      else {
+        membroInterno.push(data.membro_interno.id);
+      }
+    });
+
+    this.cadastroForm.controls.membros_da_banca_funcionario.setValue(membroInterno);
+    this.cadastroForm.controls.membros_da_banca_colaboradorExterno.setValue(membroExterno);
   }
 
   criarFormulario() {
@@ -74,7 +108,8 @@ export class EditarPropostaDeTccComponent implements OnInit {
         !this.alterar ? '' : this.propostaDeTcc.metodologia,
         [Validators.required],
       ],
-      membros_da_banca: [[], []],
+      membros_da_banca_funcionario: [[], [Validators.required]],
+      membros_da_banca_colaboradorExterno: [[], [Validators.required]]
     });
   }
 
@@ -87,14 +122,23 @@ export class EditarPropostaDeTccComponent implements OnInit {
   }
 
   AtualizarDadosObjeto() {
-    this.propostaDeTcc = Object.assign(
-      {},
-      this.propostaDeTcc,
-      this.cadastroForm.value
-    );
-    this.propostaDeTcc.orientacao_id = parseInt(
-      this.propostaDeTcc.orientacao_id
-    );
+    this.propostaDeTcc = Object.assign({}, this.propostaDeTcc, this.cadastroForm.value);
+    this.propostaDeTcc.orientacao_id = parseInt(this.propostaDeTcc.orientacao_id);
+
+    const membrosDaBanca = [];
+
+    this.cadastroForm.controls.membros_da_banca_funcionario.value.map(funcionario => {
+      membrosDaBanca.push({membro_interno_id : funcionario});
+    });
+
+    this.cadastroForm.controls.membros_da_banca_colaboradorExterno.value.map(colaboradorExterno => {
+      membrosDaBanca.push({membro_externo_id : colaboradorExterno});
+    });
+
+    this.propostaDeTcc.membros_da_banca = membrosDaBanca;
+
+    delete this.propostaDeTcc.membros_da_banca_funcionario;
+    delete this.propostaDeTcc.membros_da_banca_colaboradorExterno;
   }
 
   atualizar() {

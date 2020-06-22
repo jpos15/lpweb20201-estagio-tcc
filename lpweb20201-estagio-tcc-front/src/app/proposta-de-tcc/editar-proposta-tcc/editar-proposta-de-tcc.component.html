@@ -207,6 +207,42 @@
             </div>
           </div>
         </div>
+        <h5>Membros da banca</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="membros_da_banca_funcionario">Funcionários</label>
+              <select multiple class="form-control" id="membros_da_banca_funcionario"
+                formControlName="membros_da_banca_funcionario" [ngClass]="{'is-invalid':cadastroForm.get('membros_da_banca_funcionario').errors && (cadastroForm.get('membros_da_banca_funcionario').dirty || 
+              cadastroForm.get('membros_da_banca_funcionario').touched)}">
+                <option *ngFor="let item of listaFuncionario" [value]="item.id">{{item.cgu}} - {{item.nome}}</option>
+              </select>
+              <div class="invalid-feedback">
+                <span
+                  *ngIf="cadastroForm.get('membros_da_banca_funcionario').errors?.required && (cadastroForm.get('membros_da_banca_funcionario').dirty ||cadastroForm.get('membros_da_banca_funcionario').touched)">
+                  Pelo menos um funcionário deve ser selecionado
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="membros_da_banca_colaboradorExterno">Colaboradores Externos</label>
+              <select multiple class="form-control" id="membros_da_banca_colaboradorExterno"
+                formControlName="membros_da_banca_colaboradorExterno" [ngClass]="{'is-invalid':cadastroForm.get('membros_da_banca_colaboradorExterno').errors && (cadastroForm.get('membros_da_banca_colaboradorExterno').dirty || 
+              cadastroForm.get('membros_da_banca_colaboradorExterno').touched)}">
+                <option *ngFor="let item of listaColaboradorExterno" [value]="item.id">{{item.instituicao}} - {{item.nome}}</option>
+              </select>
+              <div class="invalid-feedback">
+                <span
+                  *ngIf="cadastroForm.get('membros_da_banca_colaboradorExterno').errors?.required && (cadastroForm.get('membros_da_banca_colaboradorExterno').dirty ||cadastroForm.get('membros_da_banca_colaboradorExterno').touched)">
+                  Pelo menos um colaborador externo deve ser selecionado
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>{{cadastroForm.value | json}}</p>
       </div>
       <div class="col-md-12 mb-3">
         <button
