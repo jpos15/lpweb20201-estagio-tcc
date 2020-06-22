@@ -1,43 +1,46 @@
 <div *ngIf="proposta">
-  <div class="row">
-    <div class="col">
-      <h1>{{ proposta.titulo }}</h1>
-    </div>
-    <div class="col-2 pr-0 align-self-center">
-      <div class="badge badge-success" *ngIf="proposta.aprovada === true">
-        Aprovada
-      </div>
-      <div class="badge badge-warning" *ngIf="proposta.aprovada === false">
-        Não aprovada
-      </div>
-      <div class="badge badge-info" *ngIf="proposta.aprovada == null">
-        Não avaliada
-      </div>
-      <a class="justify-content-end" [routerLink]="['/inicio', 'proposta-de-estagio', 'editar', proposta.id]">
-        <button class="ml-2 btn btn-sm btn-primary" *ngIf="mostrar || mostrarEditar">Editar</button>
-      </a>
-    </div>
-  </div>
-  <div>
-    <i class="fa fa-user-circle mr-2"></i>
-    Orientador(a): Prof(a) {{ proposta.orientacao.professor.funcionario.nome }}
+  <div class="d-flex justify-content-between">
+    <h1>{{ proposta.titulo }}</h1>
+
+    <a class="align-self-center" [routerLink]="['/inicio', 'proposta-de-estagio', 'editar', proposta.id]">
+      <button class="ml-2 btn btn-sm btn-primary" *ngIf="mostrar || mostrarEditar">Editar</button>
+    </a>
   </div>
 
   <div class="card shadown-sm my-3">
     <div class="card-body">
+      <div class="card-tile d-flex justify-content-between mb-4">
+        <div>
+          <i class="fa fa-user-circle mr-2"></i>
+          Orientador(a): Prof(a) {{ proposta.orientacao.professor.funcionario.nome }}
+        </div>
+        <div>
+          <div class="badge badge-success" *ngIf="proposta.aprovada === true">
+            Aprovada
+          </div>
+          <div class="badge badge-danger" *ngIf="proposta.aprovada === false">
+            Não aprovada
+          </div>
+          <div class="badge badge-info" *ngIf="proposta.aprovada == null">
+            Não avaliada
+          </div>
+        </div>
+      </div>
+      <hr />
+
       <h5>Orientação</h5>
       <div class="row mb-3">
         <div class="col-md-4">
           <div class="font-weight-bold text-black-50">Aluno</div>
           <div>{{ proposta.orientacao.aluno.nome }}</div>
         </div>
+        <div class="col-md-3">
+          <div class="font-weight-bold text-black-50">Curso</div>
+          <div>{{ proposta.orientacao.curso.nome }}</div>
+        </div>
         <div class="col">
           <div class="font-weight-bold text-black-50">Tipo</div>
           <div>{{ proposta.orientacao.tipo }}</div>
-        </div>
-        <div class="col">
-          <div class="font-weight-bold text-black-50">Curso</div>
-          <div>{{ proposta.orientacao.curso.nome }}</div>
         </div>
         <div class="col">
           <div class="font-weight-bold text-black-50">Ano</div>
@@ -61,8 +64,7 @@
           <div class="col">
             <div class="font-weight-bold text-black-50">Data</div>
             <div>
-              {{ proposta.aprovada_em | date }}, às
-              {{ proposta.aprovada_em | date: "h:mm a" }}
+              {{ proposta.aprovada_em | date }}, às {{ proposta.aprovada_em | date: "h:mm a" }}
             </div>
           </div>
         </div>
@@ -75,85 +77,71 @@
 
       <div class="mb-3">
         <h5>Resultados esperados</h5>
-        <div class="text-whitespace-pre-line">
-          {{ proposta.resultados_esperados }}
-        </div>
+        <div class="text-whitespace-pre-line">{{ proposta.resultados_esperados }}</div>
       </div>
 
       <div>
         <h5>Membros da banca</h5>
-        <ul>
+        <ul *ngIf="proposta.membros_da_banca.length">
           <li *ngFor="let membro of proposta.membros_da_banca">
             <div *ngIf="membro.membro_interno">
-              #{{ membro.membro_interno.cgu }} -
-              {{ membro.membro_interno.nome }}
+              <strong>#{{ membro.membro_interno.cgu }}</strong> {{ membro.membro_interno.nome }}
             </div>
             <div *ngIf="membro.membro_externo">
-              {{ membro.membro_externo.instituicao }} -
-              <a
-                href="mailto:{{ membro.membro_externo.email }}"
-                title="Enviar mensagem"
-                target="_blank"
-                class="text-body"
-              >
+              <a href="mailto:{{ membro.membro_externo.email }}" title="Enviar mensagem" target="_blank"
+                class="text-body">
                 {{ membro.membro_externo.nome }}
-              </a>
+              </a>, Instituição {{ membro.membro_externo.instituicao }}
             </div>
           </li>
         </ul>
+        <div *ngIf="!proposta.membros_da_banca.length">
+          Nenhum membro da banca cadastrado
+        </div>
       </div>
     </div>
   </div>
 
   <h2>
     Avaliações
-    <button
-      *ngIf="mostrar"
-      id="add"
-      data-toggle="modal"
-      data-target="#cadastrarAvaliacao"
-    >
+    <button *ngIf="mostrar" id="add" data-toggle="modal" data-target="#cadastrarAvaliacao">
       <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
   </h2>
-  <div *ngFor="let avaliacao of proposta.avaliacoes">
-    <div class="card mb-2">
-      <div class="card-body">
-        <div class="card-tile d-flex justify-content-between">
-          <span
-            ><h5>{{ avaliacao.usuario.username }}</h5></span
-          >
-          <div>
-            <span
-              class="badge badge-{{
-                avaliacao.aprovada ? 'success' : 'danger'
-              }} mr-1"
-            >
-              {{ avaliacao.aprovada ? "Aprovado" : "Não aprovado" }}
+  <div *ngIf="proposta.avaliacoes.length">
+    <div *ngFor="let avaliacao of proposta.avaliacoes">
+      <div class="card mb-2">
+        <div class="card-body">
+          <div class="card-tile d-flex justify-content-between">
+            <span>
+              <h5>{{ avaliacao.usuario.username }}</h5>
             </span>
-            <span
-              class="badge badge-{{
-                avaliacao.publicada ? 'success' : 'danger'
-              }}"
-            >
-              {{ avaliacao.publicada ? "Publicado" : "Não publicado" }}
-            </span>
+            <div>
+              <span class="badge badge-{{avaliacao.aprovada ? 'success' : 'danger'}} mr-1">
+                {{ avaliacao.aprovada ? "Aprovado" : "Não aprovado" }}
+              </span>
+              <span class="badge badge-{{avaliacao.publicada ? 'success' : 'danger'}}">
+                {{ avaliacao.publicada ? "Publicado" : "Não publicado" }}
+              </span>
+            </div>
           </div>
+          <hr />
+          <p class="card-text">
+            {{ avaliacao.comentario }}
+          </p>
         </div>
-        <hr />
-
-        <p class="card-text">
-          {{ avaliacao.comentario }}
-        </p>
-      </div>
-
-      <div class="card-footer">
-        <small>
-          Avaliado em {{ avaliacao.cadastrado_em | date }}, às
-          {{ avaliacao.cadastrado_em | date: "h:mm a" }}
-        </small>
+        <div class="card-footer">
+          <small>
+            Avaliado em {{ avaliacao.cadastrado_em | date }}, às
+            {{ avaliacao.cadastrado_em | date: "h:mm a" }}
+          </small>
+        </div>
       </div>
     </div>
+  </div>
+
+  <div *ngIf="!proposta.avaliacoes.length">
+    Você não possui avaliações.
   </div>
 </div>
 
@@ -162,61 +150,30 @@
 </div>
 
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="cadastrarAvaliacao"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="cadastrarAvaliacaoTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="cadastrarAvaliacao" tabindex="-1" role="dialog" aria-labelledby="cadastrarAvaliacaoTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Avaliar proposta</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="inlineRadioOptions"
-            id="inlineRadio1"
-            value="true"
-            [(ngModel)]="aprovada"
-          />
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="true"
+            [(ngModel)]="aprovada" />
           <label class="form-check-label" for="inlineRadio1">Aprovada</label>
         </div>
         <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="inlineRadioOptions"
-            id="inlineRadio2"
-            value="false"
-            [(ngModel)]="aprovada"
-          />
-          <label class="form-check-label" for="inlineRadio2"
-            >Não aprovada</label
-          >
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="false"
+            [(ngModel)]="aprovada" />
+          <label class="form-check-label" for="inlineRadio2">Não aprovada</label>
         </div>
         <br />
         <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value="true"
-            id="defaultCheck1"
-            [(ngModel)]="publicada"
-          />
+          <input class="form-check-input" type="checkbox" value="true" id="defaultCheck1" [(ngModel)]="publicada" />
           <label class="form-check-label" for="defaultCheck1">
             Publicar
           </label>
@@ -224,20 +181,10 @@
         <br />
         <br />
         <label for="comentario">Comentário</label>
-        <textarea
-          class="form-control"
-          id="comentario"
-          rows="3"
-          [(ngModel)]="comentario"
-        ></textarea>
+        <textarea class="form-control" id="comentario" rows="3" [(ngModel)]="comentario"></textarea>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-dismiss="modal"
-          (click)="salvarAvaliacao()"
-        >
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="salvarAvaliacao()">
           Salvar
         </button>
       </div>
