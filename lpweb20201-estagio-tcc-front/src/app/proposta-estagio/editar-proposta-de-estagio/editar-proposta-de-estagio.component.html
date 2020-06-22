@@ -17,7 +17,7 @@
   </div>
   <div class="card-body">
     <form action="editar" #editar="ngForm" (subimit)="enviarDados()">
-      <div class="col-md-6 mb-3">
+      <div class="col-md-12 mb-3">
         <label>Título <span class="required">*</span></label>
         <input
           type="text"
@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <div class="col-md-6 mb-3">
+      <div class="col-md-12 mb-3">
         <label>Conceitos <span class="required">*</span></label>
         <textarea
           class="form-control"
@@ -90,7 +90,7 @@
         </div>
       </div>
 
-      <div class="col-md-6 mb-3">
+      <div class="col-md-12 mb-3">
         <label>Resultados Esperados <span class="required">*</span></label>
         <textarea
           class="form-control"
@@ -127,17 +127,17 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-12">
         <button
           type="button"
-          class="btn btn-success"
+          class="btn btn-success float-right"
           (click)="enviarDados()"
           [disabled]="editar.invalid"
         >
           <i class="fas fa-check"></i>
           Salvar
         </button>
-        <button type="reset" class="btn btn-secondary ml-2">Limpar</button>
+        <button type="reset" class="btn btn-secondary float-right mr-2">Limpar</button>
       </div>
     </form>
   </div>

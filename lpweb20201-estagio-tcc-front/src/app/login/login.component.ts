@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   username = null;
   password = null;
 
+  loading: boolean = false;
+
   constructor(public auth$: AuthService, private user$: UserService, private router: Router) { }
 
   ngOnInit() {
@@ -26,6 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.loading = true;
     /*
     this.auth$.login(this.username, this.password)
       .subscribe(user => {
@@ -40,8 +43,14 @@ export class LoginComponent implements OnInit {
         delay(1000),
         concatMap(() => this.auth$.getDetalhesDoUsuarioLogado())
       ).subscribe(
-        () => this.router.navigate(['/inicio']),
-        err => this.error = err.error
+        () => {
+          this.router.navigate(['/inicio'])
+          this.loading = false;
+        },
+        err => {
+          this.error = err.error
+          this.loading = false;
+        }
       );
     /*
     zip(
