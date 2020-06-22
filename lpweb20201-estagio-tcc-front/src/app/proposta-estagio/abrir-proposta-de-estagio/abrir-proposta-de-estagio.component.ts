@@ -19,6 +19,7 @@ export class AbrirPropostaDeEstagioComponent implements OnInit {
   usuario;
   mostrar: boolean = false;
   mostrarEditar: boolean = false;
+  mostrarAprovar: boolean = false;
 
   constructor(
     private propostaEstagio: PropostaEstagioService,
@@ -45,6 +46,9 @@ export class AbrirPropostaDeEstagioComponent implements OnInit {
       }
       if (grupo.name === 'Aluno') {
         this.mostrarEditar = true;
+      }
+      if (grupo.name === 'Coordenação de Estágio e TCC') {
+        this.mostrarAprovar = true;
       }
     });
   }
@@ -73,6 +77,16 @@ export class AbrirPropostaDeEstagioComponent implements OnInit {
         this.comentario = null;
         this.aprovada = null;
         this.atualizaProposta();
+      });
+  }
+
+  aprovar(aprovar: boolean) {
+    this.proposta.aprovada = aprovar;
+    this.proposta.orientacao_id = this.proposta.orientacao.id;
+
+    this.propostaEstagio.editar(this.proposta, this.proposta.id)
+      .subscribe((data) => {
+        console.log(data);
       });
   }
 }
