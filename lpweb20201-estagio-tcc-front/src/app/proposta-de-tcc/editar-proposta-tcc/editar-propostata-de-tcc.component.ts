@@ -22,7 +22,7 @@ export class EditarPropostaDeTccComponent implements OnInit {
     private route: ActivatedRoute,
     private propostaDeTcc$: PropostaDeTCCService,
     private fb: FormBuilder,
-    private routerLink: Router
+    private router: Router
   ) {
     this.propost_id = this.route.snapshot.params.id;
   }
@@ -83,7 +83,7 @@ export class EditarPropostaDeTccComponent implements OnInit {
       this.cadastroForm.markAllAsTouched();
       return '';
     }
-    this.adicionar();
+    this.atualizar();
   }
 
   AtualizarDadosObjeto() {
@@ -97,12 +97,12 @@ export class EditarPropostaDeTccComponent implements OnInit {
     );
   }
 
-  adicionar() {
+  atualizar() {
     this.AtualizarDadosObjeto();
     this.propostaDeTcc$.update(this.propostaDeTcc, this.propost_id).subscribe(
       (retorno: any) => {
-        this.routerLink.navigate([
-          `/inicio/propostas-de-tcc/${this.propost_id}`,
+        this.router.navigate([
+          `/inicio/propostas-de-tcc`,
         ]);
       },
       (error) => console.log(error)
