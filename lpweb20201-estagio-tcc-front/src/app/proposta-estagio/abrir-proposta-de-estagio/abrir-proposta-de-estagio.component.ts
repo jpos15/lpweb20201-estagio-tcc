@@ -3,7 +3,7 @@ import { PropostaEstagioService } from 'src/app/proposta-estagio.service';
 import { OrientacaoService } from 'src/app/orientacao.service';
 import { AuthService } from 'src/app/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { delay } from 'rxjs/operators';
+// import { delay } from 'rxjs/operators';
 import { AvaliacaoService } from 'src/app/avaliacao.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class AbrirPropostaDeEstagioComponent implements OnInit {
   comentario: string = null;
   aprovada: boolean;
   publicada: false;
-  usuario;
+  usuario: any;
   mostrar: boolean = false;
   mostrarEditar: boolean = false;
   mostrarAprovar: boolean = false;
@@ -26,7 +26,7 @@ export class AbrirPropostaDeEstagioComponent implements OnInit {
     private router: ActivatedRoute,
     private avaliacao$: AvaliacaoService,
     private auth$: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.router.paramMap.subscribe((params) => {
