@@ -42,12 +42,30 @@
                                 <span *ngIf="textPassword.errors.required">Informe a senha</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <button class="btn btn-primary" [disabled]="formLogin.invalid">
                                 <i class="fas fa-key" aria-hidden="true"></i>
                                 Entrar
                             </button>
-                        </div>
+                        </div> -->
+
+                        <button class="btn btn-primary" [disabled]="formLogin.invalid">
+                            <div [ngSwitch]="loading">
+                                <div *ngSwitchCase="true">
+                                    <span class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>&nbsp;
+                                    <span>Carregando ...</span>
+                                </div>
+                                <div *ngSwitchDefault>
+                                    <span>
+                                        <i class="fas fa-key" aria-hidden="true"></i>
+                                        Entrar
+                                    </span>
+                                </div>
+                            </div>
+                        </button>
+
+
                     </form>
                 </div>
             </div>
