@@ -1,91 +1,159 @@
 <div *ngIf="proposta">
   <div class="d-flex justify-content-between">
     <h1>{{ proposta.titulo }}</h1>
-    <div>
-      <div class="badge badge-success" *ngIf="proposta.aprovada === true">
-        Aprovada
+    <div *ngIf="proposta.aprovada === null && mostarAprovar">
+      <div class="btn-group align-self-center">
+        <button type="button" class="btn btn-sm btn-success" (click)="aprovar(true)">Aprovar</button>
+        <button type="button" class="btn btn-sm btn-outline-danger" (click)="aprovar(false)">Não aprovar</button>
       </div>
-      <div class="badge badge-warning" *ngIf="proposta.aprovada === false">
-        Não aprovada
-      </div>
-      <div class="badge badge-info" *ngIf="proposta.aprovada == null">
-        Não avaliada
+    </div>
+    <div *ngIf="mostrar || mostrarEditar">
+      <div class="align-self-center">
+        <a class="justify-content-end" routerLink="/inicio/propostas-de-tcc/editar/{{proposta.id}}">
+          <button class="ml-2 btn btn-sm btn-primary">Editar</button></a>
       </div>
     </div>
   </div>
-  <div class="d-flex justify-content-between">
-    <p class="mt-2"> <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
-      Orientador(a): Prof(a) {{ proposta.orientacao.professor.funcionario.nome }}</p>
-    <a class="justify-content-end" routerLink="/inicio/propostas-de-tcc/editar/{{proposta.id}}"
-      routerLinkActive="active" *ngIf="mostrar || mostrarEditar"><button
-        class="ml-2 btn btn-sm btn-primary">Editar</button></a>
+
+  <div class="card shadow-sm my-3">
+    <div class="card-body">
+
+      <div class="card-tile d-flex justify-content-between mb-4">
+        <div>
+          <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+          Orientador(a): Prof(a) {{ proposta.orientacao.professor.funcionario.nome }}
+        </div>
+        <div>
+          <div class="badge badge-success" *ngIf="proposta.aprovada === true">
+            Aprovada
+          </div>
+          <div class="badge badge-warning" *ngIf="proposta.aprovada === false">
+            Não aprovada
+          </div>
+          <div class="badge badge-info" *ngIf="proposta.aprovada == null">
+            Não avaliada
+          </div>
+        </div>
+      </div>
+      <hr />
+
+      <h5>Orientação</h5>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <div class="font-weight-bold text-black-50">Aluno</div>
+          <div>{{ proposta.orientacao.aluno.nome }}</div>
+        </div>
+        <div class="col-md-3">
+          <div class="font-weight-bold text-black-50">Curso</div>
+          <div>{{ proposta.orientacao.curso.nome }}</div>
+        </div>
+        <div class="col">
+          <div class="font-weight-bold text-black-50">Tipo</div>
+          <div>{{ proposta.orientacao.tipo }}</div>
+        </div>
+        <div class="col">
+          <div class="font-weight-bold text-black-50">Ano</div>
+          <div>{{ proposta.orientacao.ano }}</div>
+        </div>
+        <div class="col">
+          <div class="font-weight-bold text-black-50">Semestre</div>
+          <div>{{ proposta.orientacao.semestre }}</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <h5>Objetivo</h5>
+        <div class="text-whitespace-pre-line">{{ proposta.objetivo }}</div>
+      </div>
+
+      <div class="mb-3">
+        <h5>Conceitos</h5>
+        <div class="text-whitespace-pre-line">{{ proposta.conceitos }}</div>
+      </div>
+
+      <div class="mb-3">
+        <h5>Tecnologias</h5>
+        <div class="text-whitespace-pre-line">{{ proposta.tecnologias }}</div>
+      </div>
+
+      <div class="mb-3">
+        <h5>Resultados esperados</h5>
+        <div class="text-whitespace-pre-line">{{ proposta.resultados_esperados }}</div>
+      </div>
+
+      <div class="mb-3">
+        <h5>Metodologia</h5>
+        <div class="text-whitespace-pre-line">{{ proposta.metodologia }}</div>
+      </div>
+
+      <div>
+        <h5>Membros da banca</h5>
+        <ul *ngIf="proposta.membros_da_banca.length">
+          <li *ngFor="let membro of proposta.membros_da_banca">
+            <div *ngIf="membro.membro_interno">
+              <strong>#{{ membro.membro_interno.cgu }}</strong> {{ membro.membro_interno.nome }}
+            </div>
+            <div *ngIf="membro.membro_externo">
+              <a href="mailto:{{ membro.membro_externo.email }}" title="Enviar mensagem" target="_blank"
+                class="text-body">
+                {{ membro.membro_externo.nome }}
+              </a>, Instituição {{ membro.membro_externo.instituicao }}
+            </div>
+          </li>
+        </ul>
+        <div *ngIf="!proposta.membros_da_banca.length">
+          Você não possui membros na banca.
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="d-flex justify-content-between">
-    <p class="mt-2"> <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
-      Aluno(a): {{ proposta.orientacao.aluno.nome }}</p>
-  </div>
-
-  <div></div>
-
-  <hr />
-
-  <div class="btn-group float-right" role="group" aria-label="Basic example" *ngIf="proposta.aprovada === null && mostarAprovar">
-    <button type="button" class="btn btn-sm btn-outline-success" (click)="aprovar(true)">Aprovar</button>
-    <button type="button" class="btn btn-sm btn-outline-warning" (click)="aprovar(false)">Não aprovar</button>
-  </div>
-
-  <h4>Objetivo</h4>
-  <div class="text-whitespace-pre-line">{{ proposta.objetivo }}</div>
-
-  <h4>Conceitos</h4>
-  <div class="text-whitespace-pre-line">{{ proposta.conceitos }}</div>
-
-  <h4>Tecnologias</h4>
-  <div class="text-whitespace-pre-line">{{ proposta.tecnologias }}</div>
-
-  <h4>Resultados esperados</h4>
-  <div class="text-whitespace-pre-line">
-    {{ proposta.resultados_esperados }}
-  </div>
-
-  <h4>Metodologia</h4>
-  <div class="text-whitespace-pre-line">{{ proposta.metodologia }}</div>
-
-  <h4>
+  <h2>
     Avaliações
     <button *ngIf="mostrar" id="add" data-toggle="modal" data-target="#cadastrarAvaliacao">
       <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
-  </h4>
-  <br />
-  <div *ngFor="let avaliacao of avaliacoes">
-    <div class="card w-75">
-      <div class="card-header">
-        <span class="badge badge-{{
-            avaliacao.aprovada ? 'success' : 'danger'
-          }} mr-1 float-right" z>
-          {{ avaliacao.aprovada ? "Aprovada" : "Não aprovada" }}
-        </span>
-        <span class="badge badge-{{
-            avaliacao.publicada ? 'success' : 'danger'
-          }} mr-1 float-right" z>
-          {{ avaliacao.publicada ? "Publicada" : "Não publicada" }}
-        </span>
-        <b>{{ avaliacao.avaliador.usuario_username }}</b>
-      </div>
-      <div class="card-body">
-        <p class="card-text">
-          {{ avaliacao.comentario }}
-        </p>
-      </div>
-      <div class="card-header">
-        Data: {{ avaliacao.cadastrado_em | date: "dd/MM/yyyy" }} às
-        {{ avaliacao.cadastrado_em | date: "hh:mm a" }}.
+  </h2>
+
+  <div *ngIf="avaliacoes">
+    <div *ngFor="let avaliacao of avaliacoes">
+      <div class="card mb-2">
+        <div class="card-body">
+          <div class="card-tile d-flex justify-content-between">
+            <span>
+              <h5>{{ avaliacao.avaliador.usuario_username }}</h5>
+            </span>
+
+            <div>
+              <span class="badge badge-{{ avaliacao.aprovada ? 'success' : 'danger' }} mr-1">
+                {{ avaliacao.aprovada ? "Aprovado" : "Não aprovado" }}
+              </span>
+              <span class="badge badge-{{ avaliacao.publicada ? 'success' : 'danger' }} mr-1">
+                {{ avaliacao.publicada ? "Publicado" : "Não publicado" }}
+              </span>
+            </div>
+          </div>
+
+          <p class="card-text">
+            {{ avaliacao.comentario }}
+          </p>
+        </div>
+
+        <div class="card-footer">
+          <small>
+            Avaliado em {{ avaliacao.cadastrado_em | date }}, às
+            {{ avaliacao.cadastrado_em | date: "h:mm a" }}
+          </small>
+        </div>
+
       </div>
     </div>
-    <br />
   </div>
+  <div *ngIf="!avaliacoes">
+    Você não possui avaliações.
+  </div>
+
 </div>
 
 <div class="alert alert-info" *ngIf="!proposta">
