@@ -22,4 +22,5 @@ export class PropostaDeTCCService {
     return this.http.put(environment.API_URL.concat(`propostas-de-tcc/${id}/`), dados, this.auth$.httpOptions());
   }
 
+  
 }
