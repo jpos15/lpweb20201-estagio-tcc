@@ -18,10 +18,30 @@
       </a>
     </div>
   </div>
-  <div>
-    <i class="fa fa-user-circle mr-2"></i>
-    Orientador(a): Prof(a) {{ proposta.orientacao.professor.funcionario.nome }}
+
+  <div class="d-flex justify-content-between">
+    <p class="mt-2"> <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+      Orientador(a): Prof(a) {{ proposta.orientacao.professor.funcionario.nome }}</p>
+    <a class="justify-content-end" routerLink="/inicio/propostas-de-tcc/editar/{{proposta.id}}"
+      routerLinkActive="active" *ngIf="mostrar || mostrarEditar"><button
+        class="ml-2 btn btn-sm btn-primary">Editar</button></a>
+    <div class="btn-group float-right" role="group" aria-label="Basic example" *ngIf="proposta.aprovada === null && mostrarAprovar">
+      <button type="button" class="btn btn-sm btn-outline-success" (click)="aprovar(true)">Aprovar</button>
+      <button type="button" class="btn btn-sm btn-outline-warning" (click)="aprovar(false)">Não aprovar</button>
+    </div>
   </div>
+
+  <div class="d-flex justify-content-between">
+    <p class="mt-2"> <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>
+      Aluno(a): {{ proposta.orientacao.aluno.nome }}</p>
+  </div>
+  
+  <hr />
+
+  
+  
+  
+  
 
   <div class="card shadown-sm my-3">
     <div class="card-body">
