@@ -10,3 +10,9 @@ O software é composto por duas partes principais:
 Detalhes da estrutura e do funcionamento de cada um destes softwares podem ser obtidos nos arquivos `README.md` das suas respectivas pastas.
 
 A documentação está disponível a partir da pasta [docs](docs/readme.md).
+
+
+## Contribuidores
+
+| [<img src="https://avatars0.githubusercontent.com/u/24749522?s=400&u=b51b1b15d99cf90269cea31d92823e3ff192a41d&v=4" width=115><br><sub>@vinisantt</sub>](https://github.com/vinisantt) | [<img src="https://avatars3.githubusercontent.com/u/35941956?s=400&u=1463aed356f99a5f17163ddad2724907729c8f88&v=4" width=115><br><sub>@jpos15</sub>](https://github.com/jpos15) |
+| :---: | :---: |
